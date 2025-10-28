@@ -1,251 +1,561 @@
 <!DOCTYPE html>
-<html style="font-size: 16px;" lang="en"><head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="utf-8">
-    <meta name="keywords" content="HI !I&amp;apos;M ZARIF HAIKAL​, ​Real Time Sign Language Translator​, ​Hospital Database Management System, PHOTOGRAPHY​">
-    <meta name="description" content="">
-    <title>Cebause</title>
-    <link rel="stylesheet" href="nicepage.css" media="screen">
-<link rel="stylesheet" href="Home.css" media="screen">
-    <script class="u-script" type="text/javascript" src="jquery.js" defer=""></script>
-    <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script>
-    <meta name="generator" content="Nicepage 6.12.5, nicepage.com">
-    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
+    <meta name="description" content="Zarif Haikal - AI Graduate & Developer Portfolio">
+    <meta name="keywords" content="AI, Machine Learning, Developer, Portfolio, Zarif Haikal">
+    <meta name="theme-color" content="#000000">
+    <title>Zarif Haikal | Cebause</title>
      <link rel="icon" href="files/625154.png">
-    
-    
-    
-    
-    
-    
-    
-    <script type="application/ld+json">{
-		"@context": "http://schema.org",
-		"@type": "Organization",
-		"name": ""
-}</script>
-    <meta name="theme-color" content="#478ac9">
-    <meta property="og:title" content="Home">
-    <meta property="og:type" content="website">
-  <meta data-intl-tel-input-cdn-path="intlTelInput/"></head>
-  <body data-home-page="Home.html" data-home-page-title="Home" data-path-to-root="./" data-include-products="false" class="u-body u-xl-mode" data-lang="en">
-    <section class="u-black u-clearfix u-container-align-center u-section-1" id="sec-9d62">
-      <div class="u-clearfix u-sheet u-sheet-1">
-        <div class="custom-expanded data-layout-selected u-clearfix u-gutter-0 u-layout-wrap u-layout-wrap-1">
-          <div class="u-layout" style="">
-            <div class="u-layout-row" style="">
-              <div class="u-align-left u-black u-container-style u-layout-cell u-left-cell u-size-30 u-size-xs-60 u-layout-cell-1" src="">
-                <div class="u-container-layout u-container-layout-1">
-                  <h2 class="u-align-left u-text u-text-1">HI !<br>I'M ZARIF 
-                  </h2>
-                  <p class="u-align-left u-text u-text-2"> An Artificial Intelligence Graduates<br>from University Technology of MARA
-                  </p>
-                  <a href="files/RESUME_ZARIFHAIKAL.pdf" class="u-active-none u-align-center u-border-2 u-border-hover-palette-5-base u-border-white u-btn u-btn-rectangle u-button-style u-file-link u-hover-none u-none u-text-hover-palette-5-base u-text-white u-btn-1" target="_blank">resume </a>
-                </div>
-              </div>
-              <div class="u-align-center u-container-style u-layout-cell u-right-cell u-size-30 u-size-xs-60 u-layout-cell-2" src="">
-                <div class="u-container-layout u-container-layout-2" src="">
-                  <img class="custom-expanded u-image u-image-1" src="images/pastedimage-ylsc-800w.jpeg" data-image-width="800" data-image-height="943">
-                </div>
-              </div>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-text">&gt; ZH</span>
             </div>
-          </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#photography" class="nav-link">Photography</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <svg class="theme-icon sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                <svg class="theme-icon moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </button>
+            <button class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
-      </div>
-    </section>
-    <section class="u-align-center u-black u-clearfix u-container-align-center u-section-2" id="sec-fb9d">
-      <div class="u-align-left u-clearfix u-sheet u-valign-middle u-sheet-1">
-        <div class="custom-expanded u-list u-list-1">
-          <div class="u-repeater u-repeater-1">
-            <div class="u-container-align-center u-container-style u-list-item u-repeater-item">
-              <div class="u-container-layout u-similar-container u-valign-middle u-container-layout-1"><span class="u-align-center u-file-icon u-icon u-text-white u-icon-1"><img src="images/942806-70d14914.png" alt=""></span>
-                <h3 class="u-align-center u-text u-text-default u-text-1">Artificial Intelligence</h3>
-              </div>
-            </div>
-            <div class="u-container-align-center u-container-style u-list-item u-repeater-item">
-              <div class="u-container-layout u-similar-container u-valign-middle u-container-layout-2"><span class="u-align-center u-file-icon u-icon u-text-white u-icon-2"><img src="images/53775-eb74e66e.png" alt=""></span>
-                <h3 class="u-align-center u-text u-text-default u-text-2">Nature Person </h3>
-              </div>
-            </div>
-            <div class="u-container-align-center u-container-style u-list-item u-repeater-item">
-              <div class="u-container-layout u-similar-container u-valign-middle u-container-layout-3"><span class="u-align-center u-file-icon u-icon u-text-white u-icon-3"><img src="images/45010-4f7fabcf.png" alt=""></span>
-                <h3 class="u-align-center u-text u-text-default u-text-3"> Photography</h3>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section class="u-black u-clearfix u-section-3" id="carousel_8a02">
-      <div class="u-clearfix u-sheet u-valign-middle-sm u-sheet-1">
-        <h3 class="u-align-center u-text u-text-default u-text-1">PROJECT</h3>
-        <div class="data-layout-selected u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
-          <div class="u-layout">
-            <div class="u-layout-row">
-              <div class="u-container-style u-layout-cell u-size-25 u-layout-cell-1">
-                <div class="u-container-layout u-container-layout-1">
-                  <h2 class="u-align-left u-text u-text-2"> Real Time Sign Language Translator </h2>
-                  <p class="u-align-left u-text u-text-3">YOLOv8 </p>
-                </div>
-              </div>
-              <div class="u-container-style u-layout-cell u-size-35 u-layout-cell-2">
-                <div class="u-container-layout u-valign-middle u-container-layout-2">
-                  <img class="u-expanded-width u-image u-image-default u-image-1" src="images/pastedimage-tz8g-300h.png" data-image-width="579" data-image-height="300" data-animation-name="customAnimationIn" data-animation-duration="2000" data-animation-delay="0">
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section class="u-black u-clearfix u-section-4" id="carousel_d4fe">
-      <div class="u-clearfix u-sheet u-valign-middle-sm u-sheet-1">
-        <div class="data-layout-selected u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
-          <div class="u-layout">
-            <div class="u-layout-row">
-              <div class="u-container-style u-layout-cell u-size-25 u-layout-cell-1">
-                <div class="u-container-layout u-container-layout-1">
-                  <h2 class="u-align-left u-text u-text-1"> Hospital Database Management System</h2>
-                  <p class="u-align-left u-text u-text-2">ORACLE </p>
-                </div>
-              </div>
-              <div class="u-container-style u-layout-cell u-size-35 u-layout-cell-2">
-                <div class="u-container-layout u-valign-middle u-container-layout-2">
-                  <img class="u-expanded-width u-image u-image-default u-image-1" src="images/pastedimage-wghe-400w.jpeg" alt="" data-image-width="400" data-image-height="208" data-animation-name="customAnimationIn" data-animation-duration="2000" data-animation-delay="0">
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <h3 class="u-align-center u-text u-text-3">OUTDOOR </h3>
-      </div>
-    </section>
-    <section class="u-align-center u-black u-clearfix u-section-5" id="carousel_f8cb">
-      <div class="u-clearfix u-sheet u-sheet-1"><!--blog--><!--blog_options_json--><!--{"type":"Recent","source":"","tags":"","count":""}--><!--/blog_options_json-->
-        <div class="u-blog u-expanded-width u-blog-1">
-          <div class="u-list-control"></div>
-          <div class="u-repeater u-repeater-1"><!--blog_post-->
-            <div class="u-align-center u-blog-post u-container-style u-repeater-item u-video-cover u-white u-repeater-item-1">
-              <div class="u-container-layout u-similar-container u-valign-top u-container-layout-1">
-                <a class="u-post-header-link" href="blog/post-5.html"><!--blog_post_image-->
-                  <img alt="" class="u-blog-control u-expanded-width u-image u-image-default u-image-1" src="images/1e2e506e-9649-4e48-aeb8-c13d517591eb-1500h.jpg" data-image-width="1280" data-image-height="960"><!--/blog_post_image-->
-                </a>
-                <p class="u-custom-item u-text u-text-1"> Gunung Semeru</p>
-              </div>
-            </div><div class="u-align-center u-blog-post u-container-style u-repeater-item u-video-cover u-white u-repeater-item-2">
-              <div class="u-container-layout u-similar-container u-valign-top u-container-layout-2">
-                <a class="u-post-header-link" href="blog/post-4.html"><!--blog_post_image-->
-                  <img alt="" class="u-blog-control u-expanded-width u-image u-image-default u-image-2" src="images/265158d8-fcce-4350-ac42-d2472babf9a3-1500h.jpg" data-image-width="1179" data-image-height="881"><!--/blog_post_image-->
-                </a>
-                <p class="u-custom-item u-text u-text-2"> Bukit Kutu</p>
-              </div>
-            </div><div class="u-align-center u-blog-post u-container-style u-repeater-item u-video-cover u-white u-repeater-item-3">
-              <div class="u-container-layout u-similar-container u-valign-top u-container-layout-3">
-                <a class="u-post-header-link" href="blog/post-3.html"><!--blog_post_image-->
-                  <img alt="" class="u-blog-control u-expanded-width u-image u-image-default u-image-3" src="images/1619661_644787555585669_1493561034_n-1500h.jpg" data-image-width="960" data-image-height="720"><!--/blog_post_image-->
-                </a>
-                <p class="u-custom-item u-text u-text-3">Gunung Bujang
-Melaka</p>
-              </div>
-            </div><div class="u-align-center u-blog-post u-container-style u-repeater-item u-video-cover u-white u-repeater-item-3">
-              <div class="u-container-layout u-similar-container u-valign-top u-container-layout-3">
-                <a class="u-post-header-link" href="blog/post-2.html"><!--blog_post_image-->
-                  <img alt="" class="u-blog-control u-expanded-width u-image u-image-default u-image-3" src="images/c8b216e2-359a-46f7-a7a1-11bf8ca3cba9-1500h.jpg" data-image-width="1179" data-image-height="1168"><!--/blog_post_image-->
-                </a>
-                <p class="u-custom-item u-text u-text-4"> Gunung Kerinci</p>
-              </div>
-            </div><div class="u-align-center u-blog-post u-container-style u-repeater-item u-video-cover u-white u-repeater-item-3">
-              <div class="u-container-layout u-similar-container u-valign-top u-container-layout-3">
-                <a class="u-post-header-link" href="blog/post-1.html"><!--blog_post_image-->
-                  <img alt="" class="u-blog-control u-expanded-width u-image u-image-default u-image-3" src="images/fe9f4675-5f7c-40d7-94c7-38f75454c1f2-1400w.jpg" data-image-width="1029" data-image-height="1280"><!--/blog_post_image-->
-                </a>
-                <p class="u-custom-item u-text u-text-5"> Gunung Nuang</p>
-              </div>
-            </div><div class="u-align-center u-blog-post u-container-style u-repeater-item u-video-cover u-white u-repeater-item-3">
-              <div class="u-container-layout u-similar-container u-valign-top u-container-layout-3">
-                <a class="u-post-header-link" href="blog/post.html"><!--blog_post_image-->
-                  <img alt="" class="u-blog-control u-expanded-width u-image u-image-default u-image-3" src="images/screenshot2024-02-23152026-1500h.png" data-image-width="832" data-image-height="868"><!--/blog_post_image-->
-                </a>
-                <p class="u-custom-item u-text u-text-6"> Gunung Datuk</p>
-              </div>
-            </div><!--/blog_post--><!--blog_post-->
-            <!--/blog_post--><!--blog_post-->
-            <!--/blog_post--><!--blog_post-->
-            <!--/blog_post--><!--blog_post-->
-            <!--/blog_post--><!--blog_post-->
-            <!--/blog_post-->
-          </div>
-          <div class="u-list-control"></div>
-        </div><!--/blog-->
-      </div>
-    </section>
-    <section class="u-align-center u-black u-clearfix u-section-6" id="sec-b884">
-      <div class="u-clearfix u-sheet u-sheet-1">
-        <h3 class="u-align-center u-text u-text-1">PHOTOGRAPHY </h3>
-        <div class="u-expanded-width u-gallery u-layout-grid u-lightbox u-show-text-on-hover u-gallery-1">
-          <div class="u-gallery-inner u-gallery-inner-1">
-            <div class="u-effect-fade u-gallery-item">
-              <div class="u-back-slide" data-image-width="854" data-image-height="1280">
-                <img class="u-back-image u-expanded" src="images/7d1ca291-6023-4cfe-80bf-e68bfe4622ff-1300w.jpg">
-              </div>
-              <div class="u-over-slide u-shading u-over-slide-1"></div>
-            </div>
-            <div class="u-effect-fade u-gallery-item">
-              <div class="u-back-slide" data-image-width="1280" data-image-height="854">
-                <img class="u-back-image u-expanded" src="images/43eaeed9-46cb-461c-a979-46752a5a340a-1900h.jpg">
-              </div>
-              <div class="u-over-slide u-shading u-over-slide-2"></div>
-            </div>
-            <div class="u-effect-fade u-gallery-item">
-              <div class="u-back-slide" data-image-width="1280" data-image-height="854">
-                <img class="u-back-image u-expanded" src="images/49c5382b-637c-41a2-b7e8-943650717bf4-1900h.jpg">
-              </div>
-              <div class="u-over-slide u-shading u-over-slide-3"></div>
-            </div>
-            <div class="u-effect-fade u-gallery-item">
-              <div class="u-back-slide" data-image-width="1280" data-image-height="854">
-                <img class="u-back-image u-expanded" src="images/496b902b-0b3d-49a6-bd82-930c9a357432-1900h.jpg">
-              </div>
-              <div class="u-over-slide u-shading u-over-slide-4"></div>
-            </div>
-            <div class="u-effect-fade u-gallery-item">
-              <div class="u-back-slide" data-image-width="1280" data-image-height="854">
-                <img class="u-back-image u-expanded" src="images/88597843-3ac7-4266-8ff6-db26115a4a4e-1900h.jpg">
-              </div>
-              <div class="u-over-slide u-shading u-over-slide-5"></div>
-            </div>
-            <div class="u-effect-fade u-gallery-item">
-              <div class="u-back-slide" data-image-width="1280" data-image-height="854">
-                <img class="u-back-image u-expanded" src="images/a8ff1f23-9c09-4c3a-9d2d-cdfa667daa17-1900h.jpg">
-              </div>
-              <div class="u-over-slide u-shading u-over-slide-6"></div>
-            </div>
-            <div class="u-effect-fade u-gallery-item u-gallery-item-7" data-image-width="1280" data-image-height="720">
-              <div class="u-back-slide" data-image-width="854" data-image-height="1280">
-                <img class="u-back-image u-expanded u-back-image-7" src="images/a09f733a-d192-411c-9af5-03fdd7bf99d3-1300w.jpg">
-              </div>
-              <div class="u-over-slide u-shading u-over-slide-7"></div>
-            </div>
-            <div class="u-effect-fade u-gallery-item u-gallery-item-8" data-image-width="1280" data-image-height="777">
-              <div class="u-back-slide" data-image-width="1280" data-image-height="854">
-                <img class="u-back-image u-expanded u-back-image-8" src="images/f1d2cd78-e06b-4292-ad84-4673036566df-1900h.jpg">
-              </div>
-              <div class="u-over-slide u-shading u-over-slide-8"></div>
-            </div>
-          </div>
-        <div>
-    <span class="u-file-icon u-icon u-text-white u-icon-1">
-        <a href="https://www.linkedin.com/in/zarifhaikalz" target="_blank">
-            <img src="images/618-c5f192b4.png" alt="LinkedIn Profile">
-        </a>
-    </span>
-</div>
+    </nav>
 
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-background"></div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <div class="greeting">
+                        <span class="code">Hi, my name is</span>
+                    </div>
+                    <h1 class="name">
+                        <span class="typing-text"></span><span class="cursor">|</span>
+                    </h1>
+                    <p class="description">
+                        An Artificial Intelligence graduate from University Technology of MARA, 
+                        passionate about machine learning, computer vision, and creating intelligent solutions.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="files/RESUME_ZARIFHAIKAL.pdf" class="btn btn-primary" target="_blank">
+                            View Resume
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M7 17L17 7"></path>
+                                <path d="M7 7h10v10"></path>
+                            </svg>
+                        </a>
+                        <div class="social-links">
+                            <a href="https://github.com/cebause01" target="_blank" aria-label="GitHub">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path>
+                                    <path d="M9 18c-4.51 2-5-2-7-2"></path>
+                                </svg>
+                            </a>
+                            <a href="https://www.linkedin.com/in/zarifhaikalz/" target="_blank" aria-label="LinkedIn">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                                    <rect x="2" y="9" width="4" height="12"></rect>
+                                    <circle cx="4" cy="4" r="2"></circle>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="image-wrapper">
+                        <img src="images/pastedimage-ylsc-800w.jpeg" alt="Zarif Haikal">
+                        <div class="image-overlay"></div>
+              </div>
+                </div>
+              </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-number">01.</span>
+                <h2 class="section-title">About</h2>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                            <path d="M2 17l10 5 10-5"></path>
+                            <path d="M2 12l10 5 10-5"></path>
+                        </svg>
+                    </div>
+                    <h3>Artificial Intelligence</h3>
+                    <p>Specialized in machine learning, deep learning, and neural networks</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                            <polyline points="7.5 4.21 12 6.81 16.5 4.21"></polyline>
+                            <polyline points="7.5 19.79 7.5 14.6 3 12"></polyline>
+                            <polyline points="21 12 16.5 14.6 16.5 19.79"></polyline>
+                            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                            <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                        </svg>
+                    </div>
+                    <h3>Nature Enthusiast</h3>
+                    <p>Passionate about outdoor adventures and nature photography</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"></path>
+                            <circle cx="12" cy="13" r="3"></circle>
+                        </svg>
+                    </div>
+                    <h3>Photography</h3>
+                    <p>Capturing moments and landscapes through the lens</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-number">02.</span>
+                <h2 class="section-title">Featured Projects</h2>
+            </div>
+            
+            <div class="project-item">
+                <div class="project-content">
+                    <div class="project-meta">
+                        <span class="project-tag">Computer Vision</span>
+                    </div>
+                    <h3 class="project-title">Real-Time Sign Language Translator</h3>
+                    <p class="project-description">
+                        A real-time sign language translator using YOLOv8 for gesture detection via webcam. 
+                        Features custom-trained models, manual data collection, and Roboflow for dataset processing 
+                        and augmentation. Built with OpenCV and PyTorch.
+                    </p>
+                    <div class="project-tech">
+                        <span>YOLOv8</span>
+                        <span>OpenCV</span>
+                        <span>Python</span>
+                        <span>PyTorch</span>
+                        <span>Roboflow</span>
+                    </div>
+                    <a href="https://github.com/cebause01/RT-SignLanguage-YOLOv8" target="_blank" class="project-link">
+                        View on GitHub
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                            <polyline points="15 3 21 3 21 9"></polyline>
+                            <line x1="10" y1="14" x2="21" y2="3"></line>
+                        </svg>
+                    </a>
+                </div>
+                <div class="project-image">
+                    <div class="image-container">
+                        <img src="images/pastedimage-tz8g-300h.png" alt="Sign Language Translator">
+                    </div>
+              </div>
+            </div>
+
+            <div class="project-item reverse">
+                <div class="project-content">
+                    <div class="project-meta">
+                        <span class="project-tag">Database Systems</span>
+                    </div>
+                    <h3 class="project-title">Hospital Database Management System</h3>
+                    <p class="project-description">
+                        A comprehensive database management system for hospitals, built with Oracle, 
+                        ensuring efficient patient records management and streamlined healthcare operations.
+                    </p>
+                    <div class="project-tech">
+                        <span>Oracle</span>
+                        <span>SQL</span>
+                        <span>Database Design</span>
+                        <span>System Architecture</span>
+                    </div>
+                </div>
+                <div class="project-image">
+                    <div class="image-container">
+                        <img src="images/pastedimage-wghe-400w.jpeg" alt="Hospital Database System">
+                    </div>
+              </div>
+            </div>
+
+            <div class="project-item">
+                <div class="project-content">
+                    <div class="project-meta">
+                        <span class="project-tag">Web Scraping</span>
+                    </div>
+                    <h3 class="project-title">Google Maps Data Scraper</h3>
+                    <p class="project-description">
+                        A JavaScript-based web scraping tool for extracting business data from Google Maps. 
+                        Built for market research and data collection purposes with efficient automation capabilities.
+                    </p>
+                    <div class="project-tech">
+                        <span>JavaScript</span>
+                        <span>Web Scraping</span>
+                        <span>Automation</span>
+                        <span>Data Extraction</span>
+                    </div>
+                    <a href="https://github.com/cebause01/GMap_Scrape" target="_blank" class="project-link">
+                        View on GitHub
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                            <polyline points="15 3 21 3 21 9"></polyline>
+                            <line x1="10" y1="14" x2="21" y2="3"></line>
+                        </svg>
+                    </a>
+              </div>
+                <div class="project-image">
+                    <div class="image-container placeholder-bg">
+                        <div class="placeholder-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#64ffda" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                                <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                                <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                            </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+            <div class="project-item reverse">
+                <div class="project-content">
+                    <div class="project-meta">
+                        <span class="project-tag">Data Processing</span>
+                    </div>
+                    <h3 class="project-title">Telegram Data Scraper</h3>
+                    <p class="project-description">
+                        A Python-based automation tool for scraping data from Telegram. 
+                        Utilizes API integration and web automation for efficient data collection and analysis.
+                    </p>
+                    <div class="project-tech">
+                        <span>Python</span>
+                        <span>API Integration</span>
+                        <span>Telegram Bot</span>
+                        <span>Automation</span>
+                    </div>
+                    <a href="https://github.com/cebause01/Scrape_Tele" target="_blank" class="project-link">
+                        View on GitHub
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                            <polyline points="15 3 21 3 21 9"></polyline>
+                            <line x1="10" y1="14" x2="21" y2="3"></line>
+                        </svg>
+                    </a>
+                </div>
+                <div class="project-image">
+                    <div class="image-container placeholder-bg">
+                        <div class="placeholder-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#64ffda" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+              </div>
+
+            <div class="project-item">
+                <div class="project-content">
+                    <div class="project-meta">
+                        <span class="project-tag">PDF Processing</span>
+                    </div>
+                    <h3 class="project-title">PDF Processor</h3>
+                    <p class="project-description">
+                        A Python application for processing and manipulating PDF files. Features include text extraction, 
+                        page manipulation, merging, and automated processing for document workflow management.
+                    </p>
+                    <div class="project-tech">
+                        <span>Python</span>
+                        <span>PDF Libraries</span>
+                        <span>Text Extraction</span>
+                        <span>Document Processing</span>
+                    </div>
+                    <a href="https://github.com/cebause01/PDFProcessor" target="_blank" class="project-link">
+                        View on GitHub
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                            <polyline points="15 3 21 3 21 9"></polyline>
+                            <line x1="10" y1="14" x2="21" y2="3"></line>
+                        </svg>
+                    </a>
+                </div>
+                <div class="project-image">
+                    <div class="image-container placeholder-bg">
+                        <div class="placeholder-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#64ffda" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                <polyline points="14 2 14 8 20 8"></polyline>
+                                <line x1="16" y1="13" x2="8" y2="13"></line>
+                                <line x1="16" y1="17" x2="8" y2="17"></line>
+                            </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Work Experience Section -->
+    <section id="experience" class="experience-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-number">03.</span>
+                <h2 class="section-title">Work Experience</h2>
+            </div>
+            
+            <div class="experience-timeline">
+                <!-- Experience Item 1 -->
+                <div class="experience-item">
+                    <div class="experience-date">
+                        <span class="year">2025</span>
+                    </div>
+                    <div class="experience-content">
+                        <div class="experience-header">
+                            <h3 class="experience-title">AI / Software Engineer</h3>
+                            <span class="experience-company">GenSE Sdn Bhd</span>
+                        </div>
+                        <p class="experience-duration">Oct 2024 - Present (Contract - Hybrid)</p>
+                        <ul class="experience-list">
+                            <li>Develop AI solutions and software engineering projects</li>
+                            <li>Work with cross-functional teams on innovative technology solutions</li>
+                            <li>Apply AI and machine learning techniques in real-world applications</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Experience Item 2 -->
+                <div class="experience-item">
+                    <div class="experience-date">
+                        <span class="year">2025</span>
+                    </div>
+                    <div class="experience-content">
+                        <div class="experience-header">
+                            <h3 class="experience-title">K-Youth Graduate Program</h3>
+                            <span class="experience-company">GenSE Sdn Bhd</span>
+                        </div>
+                        <p class="experience-duration">May 2024 - Oct 2024 (6 mos - Cyberjaya)</p>
+                        <ul class="experience-list">
+                            <li>Completed intensive graduate program in AI and technology development</li>
+                            <li>Gained hands-on experience in artificial intelligence and web technologies</li>
+                            <li>Developed skills in HTML5, CSS, and modern web development practices</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Experience Item 3 -->
+                <div class="experience-item">
+                    <div class="experience-date">
+                        <span class="year">2024</span>
+                    </div>
+                    <div class="experience-content">
+                        <div class="experience-header">
+                            <h3 class="experience-title">Information Technology Consultant</h3>
+                            <span class="experience-company">Aimstral</span>
+                        </div>
+                        <p class="experience-duration">Mar 2024 - Jun 2024 (4 mos - Kuching, Sarawak)</p>
+                        <ul class="experience-list">
+                            <li>Provided technical support and IT consulting services</li>
+                            <li>Developed web applications using PHP and modern web technologies</li>
+                            <li>Assisted clients with technology solutions and troubleshooting</li>
+                        </ul>
+              </div>
+                </div>
+
+                <!-- Experience Item 4 -->
+                <div class="experience-item">
+                    <div class="experience-date">
+                        <span class="year">2022</span>
+                    </div>
+                    <div class="experience-content">
+                        <div class="experience-header">
+                            <h3 class="experience-title">Web Developer (Internship)</h3>
+                            <span class="experience-company">Prosignal</span>
+                        </div>
+                        <p class="experience-duration">Sep 2021 - Feb 2022 (6 mos - Subang Bestari)</p>
+                        <ul class="experience-list">
+                            <li>Developed and maintained web applications</li>
+                            <li>Worked with network-attached storage (NAS) systems</li>
+                            <li>Contributed to various web development projects</li>
+                        </ul>
+              </div>
+            </div>
+          </div>
+      </div>
+    </section>
+
+    <!-- Outdoor Section -->
+    <section class="outdoor-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-number">04.</span>
+                <h2 class="section-title">Outdoor Adventures</h2>
+            </div>
+            <div class="adventure-grid">
+                <div class="adventure-card">
+                    <img src="images/1e2e506e-9649-4e48-aeb8-c13d517591eb-1500h.jpg" alt="Gunung Semeru">
+                    <div class="adventure-overlay">
+                        <h3>Gunung Semeru</h3>
+                    </div>
+                </div>
+                <div class="adventure-card">
+                    <img src="images/265158d8-fcce-4350-ac42-d2472babf9a3-1500h.jpg" alt="Bukit Kutu">
+                    <div class="adventure-overlay">
+                        <h3>Bukit Kutu</h3>
+              </div>
+                </div>
+                <div class="adventure-card">
+                    <img src="images/1619661_644787555585669_1493561034_n-1500h.jpg" alt="Gunung Bujang Melaka">
+                    <div class="adventure-overlay">
+                        <h3>Gunung Bujang Melaka</h3>
+              </div>
+            </div>
+                <div class="adventure-card">
+                    <img src="images/c8b216e2-359a-46f7-a7a1-11bf8ca3cba9-1500h.jpg" alt="Gunung Kerinci">
+                    <div class="adventure-overlay">
+                        <h3>Gunung Kerinci</h3>
+          </div>
+        </div>
+                <div class="adventure-card">
+                    <img src="images/fe9f4675-5f7c-40d7-94c7-38f75454c1f2-1400w.jpg" alt="Gunung Nuang">
+                    <div class="adventure-overlay">
+                        <h3>Gunung Nuang</h3>
+              </div>
+              </div>
+                <div class="adventure-card">
+                    <img src="images/screenshot2024-02-23152026-1500h.png" alt="Gunung Datuk">
+                    <div class="adventure-overlay">
+                        <h3>Gunung Datuk</h3>
+              </div>
+              </div>
+          </div>
+      </div>
+    </section>
+
+    <!-- Photography Section -->
+    <section id="photography" class="photography-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-number">05.</span>
+                <h2 class="section-title">Photography</h2>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="images/7d1ca291-6023-4cfe-80bf-e68bfe4622ff-1300w.jpg" alt="Photography">
+                    <div class="gallery-overlay"></div>
+              </div>
+                <div class="gallery-item">
+                    <img src="images/43eaeed9-46cb-461c-a979-46752a5a340a-1900h.jpg" alt="Photography">
+                    <div class="gallery-overlay"></div>
+            </div>
+                <div class="gallery-item">
+                    <img src="images/49c5382b-637c-41a2-b7e8-943650717bf4-1900h.jpg" alt="Photography">
+                    <div class="gallery-overlay"></div>
+              </div>
+                <div class="gallery-item">
+                    <img src="images/496b902b-0b3d-49a6-bd82-930c9a357432-1900h.jpg" alt="Photography">
+                    <div class="gallery-overlay"></div>
+            </div>
+                <div class="gallery-item">
+                    <img src="images/88597843-3ac7-4266-8ff6-db26115a4a4e-1900h.jpg" alt="Photography">
+                    <div class="gallery-overlay"></div>
+              </div>
+                <div class="gallery-item">
+                    <img src="images/a8ff1f23-9c09-4c3a-9d2d-cdfa667daa17-1900h.jpg" alt="Photography">
+                    <div class="gallery-overlay"></div>
+            </div>
+                <div class="gallery-item">
+                    <img src="images/a09f733a-d192-411c-9af5-03fdd7bf99d3-1300w.jpg" alt="Photography">
+                    <div class="gallery-overlay"></div>
+              </div>
+                <div class="gallery-item">
+                    <img src="images/f1d2cd78-e06b-4292-ad84-4673036566df-1900h.jpg" alt="Photography">
+                    <div class="gallery-overlay"></div>
+              </div>
+            </div>
+              </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="contact-content">
+                <div class="section-header">
+                    <span class="section-number">06.</span>
+                    <h2 class="section-title">Get In Touch</h2>
+            </div>
+                <p class="contact-description">
+                    I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
+                </p>
+                <a href="mailto:zarif0107@icloud.com" class="btn btn-outline">
+                    Say Hello
+                </a>
+                <div class="footer-links">
+                    <a href="https://github.com/cebause01" target="_blank" class="footer-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path>
+                            <path d="M9 18c-4.51 2-5-2-7-2"></path>
+                        </svg>
+                        <span>GitHub</span>
+                    </a>
+                    <a href="https://www.linkedin.com/in/zarifhaikalz/" target="_blank" class="footer-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                            <rect x="2" y="9" width="4" height="12"></rect>
+                            <circle cx="4" cy="4" r="2"></circle>
+                        </svg>
+                        <span>LinkedIn</span>
+                    </a>
+                    <a href="files/RESUME_ZARIFHAIKAL.pdf" target="_blank" class="footer-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                            <polyline points="10 9 9 9 8 9"></polyline>
+                        </svg>
+                        <span>Resume</span>
+                    </a>
+              </div>
+                <p class="copyright">Designed & Built by Zarif Haikal © <span id="currentYear">2024</span></p>
+            </div>
+          </div>
     </section>
     
-    
-    
-    
-
-  
-</body></html>
+    <script src="script.js"></script>
+</body>
+</html>
