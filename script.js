@@ -224,6 +224,72 @@ themeToggle?.addEventListener('click', () => {
 });
 
 // ===================================
+// Scroll Progress Indicator
+// ===================================
+const scrollProgress = document.getElementById('scrollProgress');
+
+window.addEventListener('scroll', () => {
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const scrollPercent = (scrollTop / (documentHeight - windowHeight)) * 100;
+    
+    if (scrollProgress) {
+        scrollProgress.style.width = scrollPercent + '%';
+    }
+});
+
+// ===================================
+// Back to Top Button
+// ===================================
+const backToTopButton = document.getElementById('backToTop');
+
+window.addEventListener('scroll', () => {
+    if (window.pageYOffset > 300) {
+        backToTopButton?.classList.add('visible');
+    } else {
+        backToTopButton?.classList.remove('visible');
+    }
+});
+
+backToTopButton?.addEventListener('click', () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
+
+// ===================================
+// Project Filters
+// ===================================
+const filterButtons = document.querySelectorAll('.filter-btn');
+const projectItems = document.querySelectorAll('.project-item');
+
+filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        // Remove active class from all buttons
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        // Add active class to clicked button
+        button.classList.add('active');
+        
+        const filterValue = button.getAttribute('data-filter');
+        
+        projectItems.forEach(item => {
+            if (filterValue === 'all') {
+                item.classList.remove('hidden');
+            } else {
+                const categories = item.getAttribute('data-category');
+                if (categories && categories.includes(filterValue)) {
+                    item.classList.remove('hidden');
+                } else {
+                    item.classList.add('hidden');
+                }
+            }
+        });
+    });
+});
+
+// ===================================
 // Console Easter Egg
 // ===================================
 console.log(
