@@ -290,6 +290,188 @@ filterButtons.forEach(button => {
 });
 
 // ===================================
+// Parallax Scrolling Effect
+// ===================================
+const parallaxBg = document.querySelector('.parallax-bg');
+const parallaxImage = document.querySelector('.parallax-image');
+
+window.addEventListener('scroll', () => {
+    const scrolled = window.pageYOffset;
+    const heroSection = document.querySelector('.hero');
+    
+    if (heroSection && scrolled < heroSection.offsetHeight) {
+        // Parallax effect for background (slower)
+        if (parallaxBg) {
+            parallaxBg.style.transform = `translateY(${scrolled * 0.5}px)`;
+        }
+        
+        // Parallax effect for image (slightly different speed)
+        if (parallaxImage) {
+            parallaxImage.style.transform = `translateY(${scrolled * 0.15}px)`;
+        }
+    }
+});
+
+// ===================================
+// Project Modal
+// ===================================
+const modal = document.getElementById('projectModal');
+const modalOverlay = modal?.querySelector('.modal-overlay');
+const modalClose = modal?.querySelector('.modal-close');
+const projectDetailsButtons = document.querySelectorAll('.project-details-btn');
+
+// Project data
+const projectData = {
+    'sign-language': {
+        tag: 'Computer Vision',
+        title: 'Real-Time Sign Language Translator',
+        description: 'A real-time sign language translator using YOLOv8 for gesture detection via webcam. Features custom-trained models, manual data collection, and Roboflow for dataset processing and augmentation.',
+        features: [
+            'Real-time gesture recognition using webcam',
+            'Custom-trained YOLOv8 model for high accuracy',
+            'Manual data collection and annotation process',
+            'Roboflow integration for dataset augmentation',
+            'OpenCV integration for video processing',
+            'User-friendly interface with live feedback'
+        ],
+        tech: ['YOLOv8', 'OpenCV', 'Python', 'PyTorch', 'Roboflow', 'NumPy', 'Computer Vision'],
+        challenges: 'The main challenge was collecting and annotating a diverse dataset of sign language gestures. This was solved by implementing a systematic data collection process and using Roboflow for data augmentation to improve model robustness across different lighting conditions and hand positions.',
+        github: 'https://github.com/cebause01/RT-SignLanguage-YOLOv8'
+    },
+    'hospital-db': {
+        tag: 'Database Systems',
+        title: 'Hospital Database Management System',
+        description: 'A comprehensive database management system for hospitals, built with Oracle, ensuring efficient patient records management and streamlined healthcare operations.',
+        features: [
+            'Patient records management',
+            'Appointment scheduling system',
+            'Doctor and staff management',
+            'Medical history tracking',
+            'Billing and insurance integration',
+            'Secure data handling with role-based access'
+        ],
+        tech: ['Oracle Database', 'SQL', 'PL/SQL', 'Database Design', 'System Architecture', 'Data Security'],
+        challenges: 'Designing a scalable database schema that could handle complex relationships between patients, doctors, appointments, and medical records while maintaining data integrity and security. Implemented proper normalization and indexing strategies to optimize query performance.',
+        github: null
+    },
+    'gmaps-scraper': {
+        tag: 'Web Scraping',
+        title: 'Google Maps Data Scraper',
+        description: 'A JavaScript-based web scraping tool for extracting business data from Google Maps. Built for market research and data collection purposes with efficient automation capabilities.',
+        features: [
+            'Automated business information extraction',
+            'Location-based search capabilities',
+            'Export data to CSV/JSON formats',
+            'Rate limiting to avoid detection',
+            'Customizable search parameters',
+            'Error handling and retry mechanisms'
+        ],
+        tech: ['JavaScript', 'Node.js', 'Puppeteer', 'Web Scraping', 'Automation', 'Data Extraction'],
+        challenges: 'Handling dynamic content loading and anti-scraping measures. Implemented smart delays, user-agent rotation, and proper DOM waiting mechanisms to ensure reliable data extraction while respecting website policies.',
+        github: 'https://github.com/cebause01/GMap_Scrape'
+    },
+    'telegram-scraper': {
+        tag: 'Data Processing',
+        title: 'Telegram Data Scraper',
+        description: 'A Python-based automation tool for scraping data from Telegram channels and groups. Utilizes API integration and web automation for efficient data collection and analysis.',
+        features: [
+            'Channel and group message extraction',
+            'Media file downloading',
+            'User information collection',
+            'Message history archiving',
+            'Keyword-based filtering',
+            'Scheduled automated scraping'
+        ],
+        tech: ['Python', 'Telethon', 'Telegram API', 'asyncio', 'API Integration', 'Automation'],
+        challenges: 'Managing API rate limits and handling large volumes of data efficiently. Implemented asynchronous processing and batch operations to improve performance while staying within Telegram API constraints.',
+        github: 'https://github.com/cebause01/Scrape_Tele'
+    },
+    'pdf-processor': {
+        tag: 'PDF Processing',
+        title: 'PDF Processor',
+        description: 'A Python application for processing and manipulating PDF files. Features include text extraction, page manipulation, merging, and automated processing for document workflow management.',
+        features: [
+            'Text extraction from PDFs',
+            'PDF merging and splitting',
+            'Page rotation and reordering',
+            'Watermark addition',
+            'Batch processing capabilities',
+            'OCR support for scanned documents'
+        ],
+        tech: ['Python', 'PyPDF2', 'PDF Libraries', 'Text Extraction', 'Document Processing', 'OCR'],
+        challenges: 'Handling various PDF formats and ensuring text extraction accuracy across different document types. Implemented multiple extraction strategies and fallback mechanisms to handle edge cases and corrupted files.',
+        github: 'https://github.com/cebause01/PDFProcessor'
+    }
+};
+
+// Open modal
+projectDetailsButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const projectId = button.getAttribute('data-project');
+        const project = projectData[projectId];
+        
+        if (project && modal) {
+            // Populate modal with project data
+            modal.querySelector('.modal-tag').textContent = project.tag;
+            modal.querySelector('.modal-title').textContent = project.title;
+            modal.querySelector('.modal-description').textContent = project.description;
+            
+            // Features list
+            const featuresList = modal.querySelector('.modal-features-list');
+            featuresList.innerHTML = '';
+            project.features.forEach(feature => {
+                const li = document.createElement('li');
+                li.textContent = feature;
+                featuresList.appendChild(li);
+            });
+            
+            // Tech stack
+            const techStack = modal.querySelector('.modal-tech-stack');
+            techStack.innerHTML = '';
+            project.tech.forEach(tech => {
+                const span = document.createElement('span');
+                span.textContent = tech;
+                techStack.appendChild(span);
+            });
+            
+            // Challenges
+            modal.querySelector('.modal-challenges-text').textContent = project.challenges;
+            
+            // GitHub link
+            const githubLink = modal.querySelector('.modal-github-link');
+            if (project.github) {
+                githubLink.href = project.github;
+                githubLink.style.display = 'inline-flex';
+            } else {
+                githubLink.style.display = 'none';
+            }
+            
+            // Show modal
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+    });
+});
+
+// Close modal
+const closeModal = () => {
+    if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+};
+
+modalClose?.addEventListener('click', closeModal);
+modalOverlay?.addEventListener('click', closeModal);
+
+// Close modal on Escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal?.classList.contains('active')) {
+        closeModal();
+    }
+});
+
+// ===================================
 // Console Easter Egg
 // ===================================
 console.log(
