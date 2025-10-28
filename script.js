@@ -472,6 +472,138 @@ document.addEventListener('keydown', (e) => {
 });
 
 // ===================================
+// Animated Stats Counter
+// ===================================
+const statNumbers = document.querySelectorAll('.stat-number');
+let statsAnimated = false;
+
+const animateStats = () => {
+    statNumbers.forEach(stat => {
+        const target = parseFloat(stat.getAttribute('data-target'));
+        const duration = 2000; // 2 seconds
+        const increment = target / (duration / 16); // 60fps
+        let current = 0;
+        
+        const updateCounter = () => {
+            current += increment;
+            if (current < target) {
+                // Handle decimal values
+                if (target % 1 !== 0) {
+                    stat.textContent = current.toFixed(2);
+                } else {
+                    stat.textContent = Math.floor(current);
+                }
+                requestAnimationFrame(updateCounter);
+            } else {
+                // Final value
+                if (target % 1 !== 0) {
+                    stat.textContent = target.toFixed(2);
+                } else {
+                    stat.textContent = target;
+                }
+            }
+        };
+        
+        updateCounter();
+    });
+};
+
+// Trigger animation when stats section is in view
+const statsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting && !statsAnimated) {
+            animateStats();
+            statsAnimated = true;
+        }
+    });
+}, { threshold: 0.5 });
+
+const statsSection = document.querySelector('.stats-section');
+if (statsSection) {
+    statsObserver.observe(statsSection);
+}
+
+// ===================================
+// Image Lightbox
+// ===================================
+const lightbox = document.getElementById('imageLightbox');
+const lightboxImage = lightbox?.querySelector('.lightbox-image');
+const lightboxOverlay = lightbox?.querySelector('.lightbox-overlay');
+const lightboxClose = lightbox?.querySelector('.lightbox-close');
+const lightboxPrev = lightbox?.querySelector('.lightbox-prev');
+const lightboxNext = lightbox?.querySelector('.lightbox-next');
+const lightboxCurrent = lightbox?.querySelector('.lightbox-current');
+const lightboxTotal = lightbox?.querySelector('.lightbox-total');
+const galleryItems = document.querySelectorAll('.gallery-item');
+
+let currentImageIndex = 0;
+const images = Array.from(galleryItems).map(item => item.getAttribute('data-image'));
+
+// Update lightbox total count
+if (lightboxTotal) {
+    lightboxTotal.textContent = images.length;
+}
+
+// Open lightbox
+const openLightbox = (index) => {
+    if (lightbox && lightboxImage) {
+        currentImageIndex = index;
+        lightboxImage.src = images[index];
+        if (lightboxCurrent) {
+            lightboxCurrent.textContent = index + 1;
+        }
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+};
+
+// Close lightbox
+const closeLightbox = () => {
+    if (lightbox) {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+};
+
+// Navigate to previous image
+const prevImage = () => {
+    currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+    openLightbox(currentImageIndex);
+};
+
+// Navigate to next image
+const nextImage = () => {
+    currentImageIndex = (currentImageIndex + 1) % images.length;
+    openLightbox(currentImageIndex);
+};
+
+// Add click events to gallery items
+galleryItems.forEach((item, index) => {
+    item.addEventListener('click', () => {
+        openLightbox(index);
+    });
+});
+
+// Lightbox controls
+lightboxClose?.addEventListener('click', closeLightbox);
+lightboxOverlay?.addEventListener('click', closeLightbox);
+lightboxPrev?.addEventListener('click', prevImage);
+lightboxNext?.addEventListener('click', nextImage);
+
+// Keyboard navigation for lightbox
+document.addEventListener('keydown', (e) => {
+    if (lightbox?.classList.contains('active')) {
+        if (e.key === 'Escape') {
+            closeLightbox();
+        } else if (e.key === 'ArrowLeft') {
+            prevImage();
+        } else if (e.key === 'ArrowRight') {
+            nextImage();
+        }
+    }
+});
+
+// ===================================
 // Console Easter Egg
 // ===================================
 console.log(
