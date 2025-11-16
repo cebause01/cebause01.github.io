@@ -472,6 +472,78 @@ document.addEventListener('keydown', (e) => {
 });
 
 // ===================================
+// Skill Modal
+// ===================================
+const skillModal = document.getElementById('skillModal');
+const skillModalOverlay = skillModal?.querySelector('.modal-overlay');
+const skillModalClose = skillModal?.querySelector('.modal-close');
+
+// Brief descriptions for skills/technologies
+const skillData = {
+    'Python': 'General-purpose language used for AI/ML, automation, and scripting. Experienced with data analysis, computer vision, and model training.',
+    'JavaScript': 'Primary language for web interactivity and tooling. Comfortable with DOM, async patterns, and automation/scraping.',
+    'SQL': 'Writing queries, joins, aggregations, and optimizing database operations for analytics and apps.',
+    'HTML/CSS': 'Building responsive, accessible UIs with modern layout techniques and design systems.',
+    'Java': 'Object-oriented programming for backend and academic projects; strong fundamentals and tooling.',
+    'C++': 'Performance-focused programming and data structures/algorithms fundamentals.',
+    'TensorFlow': 'Building and deploying neural networks for classification and detection tasks.',
+    'PyTorch': 'Research-friendly deep learning framework used for computer vision projects and training loops.',
+    'Keras': 'High-level API for rapid prototyping of neural networks on top of TensorFlow.',
+    'Scikit-learn': 'Classical ML toolkit for preprocessing, modeling, and evaluation.',
+    'YOLOv8': 'Real-time object detection framework used in sign language translator project.',
+    'OpenCV': 'Computer vision library for image processing, video streams, and augmentation.',
+    'Git': 'Version control workflows including branching, pull requests, and code reviews.',
+    'Docker': 'Containerizing apps for reproducible environments and smoother deployments.',
+    'Oracle Database': 'Relational database design, PL/SQL, and performance considerations.',
+    'VS Code': 'Daily driver editor with extensions, debugging, and workspace setup.',
+    'Jupyter': 'Interactive notebooks for data exploration, experimentation, and reporting.',
+    'Pandas': 'Data manipulation and analysis using DataFrame operations and pipelines.',
+    'Computer Vision': 'Detection, tracking, and image processing pipelines using CV and DL.',
+    'Deep Learning': 'Designing, training, and evaluating neural networks for CV and NLP tasks.',
+    'Machine Learning': 'Supervised/unsupervised methods, model selection, and validation.',
+    'Web Scraping': 'Automating data extraction with headless browsers and API-aware techniques.',
+    'Data Analysis': 'EDA, cleaning, visualization, and insight generation for decision-making.',
+    'Neural Networks': 'Architectures, loss functions, optimization strategies, and training stability.'
+};
+
+const openSkillModal = (title, description) => {
+    if (skillModal) {
+        const titleEl = skillModal.querySelector('.modal-title');
+        const descEl = skillModal.querySelector('.modal-description');
+        if (titleEl) titleEl.textContent = title;
+        if (descEl) descEl.textContent = description;
+        skillModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+};
+
+const closeSkillModal = () => {
+    if (skillModal) {
+        skillModal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+};
+
+// Attach click handlers to tech items
+document.querySelectorAll('.tech-item').forEach(item => {
+    item.addEventListener('click', () => {
+        const name = item.querySelector('.tech-name')?.textContent?.trim();
+        if (!name) return;
+        const description = skillData[name] || 'No additional details available for this skill yet.';
+        openSkillModal(name, description);
+    });
+});
+
+// Close events for skill modal
+skillModalClose?.addEventListener('click', closeSkillModal);
+skillModalOverlay?.addEventListener('click', closeSkillModal);
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && skillModal?.classList.contains('active')) {
+        closeSkillModal();
+    }
+});
+
+// ===================================
 // Animated Stats Counter
 // ===================================
 const statNumbers = document.querySelectorAll('.stat-number');
