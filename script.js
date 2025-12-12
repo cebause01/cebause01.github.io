@@ -322,6 +322,54 @@ const projectDetailsButtons = document.querySelectorAll('.project-details-btn');
 
 // Project data
 const projectData = {
+    'idialysis': {
+        tag: 'AI Healthcare',
+        title: 'iDialysis - PD Patient Management System',
+        description: 'A digital healthcare platform for Peritoneal Dialysis (PD) patient reporting with AI-powered weekly assessments. The system automates patient monitoring and provides doctors with timely updates and insights for better patient care.',
+        features: [
+            'Digital patient reporting system for PD patients',
+            'AI-powered weekly patient assessment and analysis',
+            'Automated updates and notifications for doctors',
+            'Patient data tracking and trend analysis',
+            'Secure healthcare data management',
+            'Real-time monitoring and alert system'
+        ],
+        tech: ['AI/ML', 'Healthcare Technology', 'Data Analytics', 'Patient Monitoring', 'Web Application', 'Machine Learning'],
+        challenges: 'Developing an AI system that can accurately assess patient conditions from weekly reports while ensuring data privacy and compliance with healthcare regulations. The challenge involved creating reliable assessment algorithms and integrating them seamlessly into the clinical workflow to provide actionable insights for doctors.',
+        github: 'https://idialysis.my'
+    },
+    'multi-llm': {
+        tag: 'AI/ML',
+        title: 'Multi-LLM Chat Application',
+        description: 'A modern AI chat application that compares responses from 5 different AI models simultaneously using the OpenRouter API. Features an intelligent judging system that evaluates and selects the best response, with support for images and file uploads.',
+        features: [
+            'Multi-model comparison - sends queries to 5 AI models simultaneously',
+            'Intelligent judging system that evaluates and selects the best response',
+            'Image upload and analysis support',
+            'File upload and text processing capabilities',
+            'Modern, minimalist UI inspired by OpenAI',
+            'Customizable model selection and judge model configuration'
+        ],
+        tech: ['React', 'Vite', 'Node.js', 'Express', 'OpenRouter API', 'JavaScript', 'CSS'],
+        challenges: 'Implementing a system that efficiently handles multiple concurrent API calls to different AI models while maintaining performance and user experience. The challenge involved creating a robust judging mechanism that could fairly evaluate responses from different models and handle various input types including text, images, and files.',
+        github: 'https://github.com/cebause01/Multi-LLM'
+    },
+    'llm-finetuning': {
+        tag: 'AI Fine-Tuning',
+        title: 'LLM Fine-Tuning & Model Deployment',
+        description: 'Specialized in fine-tuning large language models using Unsloth for efficient training, converting models to GGUF format, and deploying them locally via Ollama. Published multiple custom models on Hugging Face including the AuraAI series (AuraAI-A through AuraAI-D) and ZarifAI.',
+        features: [
+            'Fine-tuning LLMs using Unsloth for faster and more memory-efficient training',
+            'Converting fine-tuned models to GGUF format for local deployment',
+            'Deploying models locally using Ollama for offline inference',
+            'Publishing and sharing models on Hugging Face platform',
+            'Created AuraAI series (A, B, C, D) and ZarifAI models',
+            'Optimizing models for different use cases and performance requirements'
+        ],
+        tech: ['Unsloth', 'GGUF', 'Ollama', 'Hugging Face', 'PyTorch', 'Transformers', 'Model Fine-Tuning', 'LLM'],
+        challenges: 'Fine-tuning large language models efficiently while managing computational resources and memory constraints. The challenge involved learning Unsloth optimization techniques, understanding GGUF conversion processes, and ensuring models work seamlessly with Ollama for local deployment. Balancing model performance, size, and inference speed was crucial for creating usable models.',
+        github: 'https://huggingface.co/zarifhaikal01'
+    },
     'sign-language': {
         tag: 'Computer Vision',
         title: 'Real-Time Sign Language Translator',
@@ -437,11 +485,34 @@ projectDetailsButtons.forEach(button => {
             // Challenges
             modal.querySelector('.modal-challenges-text').textContent = project.challenges;
             
-            // GitHub link
+            // GitHub link / External link
             const githubLink = modal.querySelector('.modal-github-link');
             if (project.github) {
                 githubLink.href = project.github;
                 githubLink.style.display = 'inline-flex';
+                // Update link text and icon based on URL
+                if (project.github.includes('github.com')) {
+                    // Keep GitHub icon and text (restore if changed)
+                    if (!githubLink.textContent.includes('GitHub')) {
+                        githubLink.innerHTML = `
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path>
+                                <path d="M9 18c-4.51 2-5-2-7-2"></path>
+                            </svg>
+                            View on GitHub
+                        `;
+                    }
+                } else {
+                    // Change to external link icon and text
+                    githubLink.innerHTML = `
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                            <polyline points="15 3 21 3 21 9"></polyline>
+                            <line x1="10" y1="14" x2="21" y2="3"></line>
+                        </svg>
+                        Visit Site
+                    `;
+                }
             } else {
                 githubLink.style.display = 'none';
             }
