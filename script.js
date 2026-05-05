@@ -13,6 +13,7 @@ window.addEventListener('scroll', () => {
 // ===================================
 // Mobile Menu Toggle
 // ===================================
+const navbar = document.getElementById('navbar');
 const menuToggle = document.getElementById('menuToggle');
 const navMenu = document.querySelector('.nav-menu');
 const navLinks = document.querySelectorAll('.nav-link');
@@ -32,7 +33,11 @@ navLinks.forEach(link => {
 
 // Close menu when clicking outside
 document.addEventListener('click', (e) => {
-    if (!navbar.contains(e.target) && navMenu.classList.contains('active')) {
+    if (
+        navbar &&
+        !navbar.contains(e.target) &&
+        navMenu.classList.contains('active')
+    ) {
         navMenu.classList.remove('active');
         menuToggle.classList.remove('active');
     }
@@ -102,8 +107,9 @@ window.addEventListener('scroll', () => {
 // Intersection Observer for Fade-in Animations
 // ===================================
 const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -100px 0px'
+    threshold: 0.05,
+    // Loose margin so sections (e.g. projects) still reveal on short mobile viewports
+    rootMargin: '0px 0px -24px 0px'
 };
 
 const observer = new IntersectionObserver((entries) => {
