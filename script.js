@@ -139,7 +139,7 @@ const createCursor = () => {
         position: fixed;
         width: 20px;
         height: 20px;
-        border: 2px solid #64ffda;
+        border: 2px solid #2563eb;
         border-radius: 50%;
         pointer-events: none;
         z-index: 9999;
@@ -344,6 +344,40 @@ const projectData = {
         challenges: 'Developing an AI system that can accurately assess patient conditions from weekly reports while ensuring data privacy and compliance with healthcare regulations. The challenge involved creating reliable assessment algorithms and integrating them seamlessly into the clinical workflow to provide actionable insights for doctors.',
         github: 'https://idialysis.my'
     },
+    'sdip': {
+        tag: 'Government & Public Health',
+        title: 'SDIP — Sistem Digital Inspektorat dan Perundangan',
+        description: 'SDIP is an integrated system for the Unit of Inspectorate and Legislation (Unit Inspektorat dan Perundangan), Ministry of Health Malaysia (KKM). It digitises public health enforcement—covering audit, investigation, inspection, and notice management—so operations are faster, more transparent, and easier to monitor across the network of JKN and PKD.',
+        features: [
+            'Unified digital workflows for inspectorate, audit, investigation, and enforcement',
+            'End-to-end notice handling and monitoring with reduced reliance on manual forms',
+            'Designed for continuous improvement and long-term maintainability',
+            'Integration posture aligned with existing KKM systems and data practices',
+            'Real-time, centralised visibility for operational coordination',
+            'Supports national digital transformation goals for public health'
+        ],
+        tech: ['Web Platform', 'Public Health IT', 'Digital Transformation', 'Process Automation', 'System Integration', 'Government Sector'],
+        challenges: 'Delivering a sector-wide platform means balancing strict governance and usability, integrating with established KKM processes, and ensuring the product can evolve as regulations and operational needs change—all while keeping enforcement data reliable and traceable.',
+        github: 'https://sdip-home.gense.my/'
+    },
+    'ditosis': {
+        tag: 'Marketing Site',
+        title: 'Ditosis — Synthetic Data Solutions',
+        description: 'Ditosis is presented as a synthetic data company offering high-quality synthetic datasets for AI training and fine-tuning. This repository is a modern, dark-themed front-end (with optional local Node server) showcasing services, platform positioning, and conversion-focused sections. The public site is served at ditosis.gense.my.',
+        features: [
+            'Dark UI with cyan/teal gradient accents and polished marketing sections',
+            'Responsive layout with scroll-triggered animations and interactive touches (e.g. particle-style hero treatment)',
+            'Content blocks for services, platform narrative, industries, social proof, and lead capture',
+            'Production deployment at ditosis.gense.my',
+            'Static-first workflow with GitHub Pages–friendly entry point',
+            'Optional Node-based local server for development (see repository)',
+            'Modular structure with pages/partials for maintainable markup'
+        ],
+        tech: ['HTML', 'CSS', 'JavaScript', 'Node.js', 'GitHub Pages', 'Responsive Design'],
+        challenges: 'Balancing a bold marketing aesthetic with performance and readability—keeping animations smooth across devices while keeping the codebase simple enough to host as static assets and iterate on copy and layout quickly.',
+        liveUrl: 'https://ditosis.gense.my/',
+        github: 'https://github.com/cebause01/Ditosis'
+    },
     'multi-llm': {
         tag: 'AI/ML',
         title: 'Multi-LLM Chat Application',
@@ -491,33 +525,43 @@ projectDetailsButtons.forEach(button => {
             // Challenges
             modal.querySelector('.modal-challenges-text').textContent = project.challenges;
             
-            // GitHub link / External link
+            // Optional live site + GitHub / external link
+            const liveLink = modal.querySelector('.modal-live-link');
+            const externalLinkSvg = `
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                            <polyline points="15 3 21 3 21 9"></polyline>
+                            <line x1="10" y1="14" x2="21" y2="3"></line>
+                        </svg>
+                        Visit Site`;
+
+            if (liveLink) {
+                if (project.liveUrl) {
+                    liveLink.href = project.liveUrl;
+                    liveLink.style.display = 'inline-flex';
+                    liveLink.removeAttribute('aria-hidden');
+                    liveLink.innerHTML = externalLinkSvg;
+                } else {
+                    liveLink.style.display = 'none';
+                    liveLink.setAttribute('aria-hidden', 'true');
+                }
+            }
+
             const githubLink = modal.querySelector('.modal-github-link');
             if (project.github) {
                 githubLink.href = project.github;
                 githubLink.style.display = 'inline-flex';
                 // Update link text and icon based on URL
                 if (project.github.includes('github.com')) {
-                    // Keep GitHub icon and text (restore if changed)
-                    if (!githubLink.textContent.includes('GitHub')) {
-                        githubLink.innerHTML = `
+                    githubLink.innerHTML = `
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path>
                                 <path d="M9 18c-4.51 2-5-2-7-2"></path>
                             </svg>
                             View on GitHub
                         `;
-                    }
                 } else {
-                    // Change to external link icon and text
-                    githubLink.innerHTML = `
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                            <polyline points="15 3 21 3 21 9"></polyline>
-                            <line x1="10" y1="14" x2="21" y2="3"></line>
-                        </svg>
-                        Visit Site
-                    `;
+                    githubLink.innerHTML = externalLinkSvg;
                 }
             } else {
                 githubLink.style.display = 'none';
@@ -757,11 +801,11 @@ document.addEventListener('keydown', (e) => {
 // ===================================
 console.log(
     '%cHi there! 👋',
-    'color: #64ffda; font-size: 20px; font-weight: bold; font-family: monospace;'
+    'color: #2563eb; font-size: 20px; font-weight: bold; font-family: monospace;'
 );
 console.log(
     '%cWelcome to my portfolio!',
-    'color: #8892b0; font-size: 14px; font-family: monospace;'
+    'color: #9ca3af; font-size: 14px; font-family: monospace;'
 );
 console.log(
     '%cThanks for checking out my code 🚀',
@@ -769,5 +813,5 @@ console.log(
 );
 console.log(
     '%cConnect with me:\nGitHub: github.com/cebause01\nLinkedIn: linkedin.com/in/zarifhaikalz',
-    'color: #64ffda; font-size: 12px; font-family: monospace;'
+    'color: #2563eb; font-size: 12px; font-family: monospace;'
 );
