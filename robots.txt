@@ -1,0 +1,5 @@
+# https://cebause.one
+User-agent: *
+Allow: /
+
+Sitemap: https://cebause.one/sitemap.xml

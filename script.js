@@ -112,6 +112,8 @@ const observerOptions = {
     rootMargin: '0px 0px -24px 0px'
 };
 
+const revealOnScroll = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -121,12 +123,17 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// Observe all sections
+// Observe all sections (skip motion-heavy reveal if user prefers reduced motion)
 document.querySelectorAll('section').forEach(section => {
-    section.style.opacity = '0';
-    section.style.transform = 'translateY(30px)';
-    section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    observer.observe(section);
+    if (revealOnScroll) {
+        section.style.opacity = '0';
+        section.style.transform = 'translateY(30px)';
+        section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(section);
+    } else {
+        section.style.opacity = '1';
+        section.style.transform = 'none';
+    }
 });
 
 // ===================================
@@ -292,31 +299,92 @@ filterButtons.forEach(button => {
                 }
             }
         });
+
+        requestAnimationFrame(() => updateProjectImageParallax());
     });
 });
 
 // ===================================
-// Parallax Scrolling Effect
+// Parallax Scrolling Effect (hero + project images)
 // ===================================
 const parallaxBg = document.querySelector('.parallax-bg');
 const parallaxImage = document.querySelector('.parallax-image');
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
+const projectParallaxStrength = 0.26;
+const projectParallaxMaxShift = 72;
+
+const updateHeroParallax = (scrolled) => {
     const heroSection = document.querySelector('.hero');
-    
     if (heroSection && scrolled < heroSection.offsetHeight) {
-        // Parallax effect for background (slower)
         if (parallaxBg) {
             parallaxBg.style.transform = `translateY(${scrolled * 0.5}px)`;
         }
-        
-        // Parallax effect for image (slightly different speed)
         if (parallaxImage) {
             parallaxImage.style.transform = `translateY(${scrolled * 0.15}px)`;
         }
     }
+};
+
+const updateProjectImageParallax = () => {
+    if (prefersReducedMotion.matches) {
+        document.querySelectorAll('.project-image .image-container').forEach((el) => {
+            el.style.transform = '';
+        });
+        return;
+    }
+
+    const viewMid = window.innerHeight * 0.5;
+
+    document.querySelectorAll('.project-item').forEach((item) => {
+        const container = item.querySelector('.project-image .image-container');
+        if (!container) return;
+
+        if (item.classList.contains('hidden')) {
+            container.style.transform = '';
+            return;
+        }
+
+        const rect = container.getBoundingClientRect();
+        if (rect.bottom < -80 || rect.top > window.innerHeight + 80) {
+            container.style.transform = '';
+            return;
+        }
+
+        const elCenter = rect.top + rect.height / 2;
+        let offset = (elCenter - viewMid) * projectParallaxStrength;
+        offset = Math.max(-projectParallaxMaxShift, Math.min(projectParallaxMaxShift, offset));
+        container.style.transform = `translate3d(0, ${offset.toFixed(2)}px, 0)`;
+    });
+};
+
+let parallaxTicking = false;
+const onScrollParallax = () => {
+    const scrolled = window.pageYOffset;
+    updateHeroParallax(scrolled);
+
+    if (!parallaxTicking) {
+        requestAnimationFrame(() => {
+            updateProjectImageParallax();
+            parallaxTicking = false;
+        });
+        parallaxTicking = true;
+    }
+};
+
+window.addEventListener('scroll', onScrollParallax, { passive: true });
+window.addEventListener('resize', () => {
+    updateHeroParallax(window.pageYOffset);
+    updateProjectImageParallax();
+}, { passive: true });
+
+prefersReducedMotion.addEventListener('change', () => {
+    updateProjectImageParallax();
 });
+
+// Initial frame (hero may be mid-load)
+updateHeroParallax(window.pageYOffset);
+updateProjectImageParallax();
 
 // ===================================
 // Project Modal
@@ -731,6 +799,9 @@ const galleryItems = document.querySelectorAll('.gallery-item');
 
 let currentImageIndex = 0;
 const images = Array.from(galleryItems).map(item => item.getAttribute('data-image'));
+const galleryAlts = Array.from(galleryItems).map(
+    (item) => item.querySelector('img')?.getAttribute('alt') || 'Photography'
+);
 
 // Update lightbox total count
 if (lightboxTotal) {
@@ -742,6 +813,7 @@ const openLightbox = (index) => {
     if (lightbox && lightboxImage) {
         currentImageIndex = index;
         lightboxImage.src = images[index];
+        lightboxImage.alt = galleryAlts[index] || '';
         if (lightboxCurrent) {
             lightboxCurrent.textContent = index + 1;
         }
