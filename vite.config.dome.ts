@@ -4,10 +4,11 @@ import tailwindcss from 'tailwindcss';
 import autoprefixer from 'autoprefixer';
 import { fileURLToPath } from 'node:url';
 
-const rootDir = fileURLToPath(new URL('.', import.meta.url));
-
 export default defineConfig({
   publicDir: false,
+  define: {
+    'process.env.NODE_ENV': JSON.stringify('production'),
+  },
   plugins: [react()],
   resolve: {
     alias: {
