@@ -19,8 +19,10 @@ const navMenu = document.querySelector('.nav-menu');
 const navLinks = document.querySelectorAll('.nav-link');
 
 menuToggle?.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
+    const open = navMenu.classList.toggle('active');
     menuToggle.classList.toggle('active');
+    menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    menuToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
 });
 
 // Close menu when clicking on nav links
@@ -28,6 +30,8 @@ navLinks.forEach(link => {
     link.addEventListener('click', () => {
         navMenu.classList.remove('active');
         menuToggle.classList.remove('active');
+        menuToggle?.setAttribute('aria-expanded', 'false');
+        menuToggle?.setAttribute('aria-label', 'Open menu');
     });
 });
 
@@ -40,6 +44,8 @@ document.addEventListener('click', (e) => {
     ) {
         navMenu.classList.remove('active');
         menuToggle.classList.remove('active');
+        menuToggle?.setAttribute('aria-expanded', 'false');
+        menuToggle?.setAttribute('aria-label', 'Open menu');
     }
 });
 
@@ -51,7 +57,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
-            const offset = 80;
+            const offset = 96;
             const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
             
             window.scrollTo({
@@ -152,7 +158,7 @@ const createCursor = () => {
         position: fixed;
         width: 20px;
         height: 20px;
-        border: 2px solid #2563eb;
+        border: 2px solid #fafafa;
         border-radius: 50%;
         pointer-events: none;
         z-index: 9999;
@@ -170,7 +176,7 @@ const createCursor = () => {
     document.querySelectorAll('a, button, .gallery-item, .adventure-card').forEach(el => {
         el.addEventListener('mouseenter', () => {
             cursor.style.transform = 'scale(2)';
-            cursor.style.backgroundColor = 'rgba(100, 255, 218, 0.1)';
+            cursor.style.backgroundColor = 'rgba(255, 255, 255, 0.08)';
         });
         el.addEventListener('mouseleave', () => {
             cursor.style.transform = 'scale(1)';
@@ -223,24 +229,6 @@ const updateCurrentYear = () => {
     }
 };
 updateCurrentYear();
-
-// ===================================
-// Theme Toggle
-// ===================================
-const themeToggle = document.getElementById('themeToggle');
-const html = document.documentElement;
-
-// Load theme preference from localStorage
-const currentTheme = localStorage.getItem('theme') || 'dark';
-html.setAttribute('data-theme', currentTheme);
-
-themeToggle?.addEventListener('click', () => {
-    const currentTheme = html.getAttribute('data-theme');
-    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-    
-    html.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
-});
 
 // ===================================
 // Scroll Progress Indicator
@@ -879,7 +867,7 @@ document.addEventListener('keydown', (e) => {
 // ===================================
 console.log(
     '%cHi there! 👋',
-    'color: #2563eb; font-size: 20px; font-weight: bold; font-family: monospace;'
+    'color: #fafafa; font-size: 20px; font-weight: bold; font-family: monospace;'
 );
 console.log(
     '%cWelcome to my portfolio!',
@@ -887,9 +875,9 @@ console.log(
 );
 console.log(
     '%cThanks for checking out my code 🚀',
-    'color: #ffd700; font-size: 14px; font-family: monospace;'
+    'color: #a3a3a3; font-size: 14px; font-family: monospace;'
 );
 console.log(
     '%cConnect with me:\nGitHub: github.com/cebause01\nLinkedIn: linkedin.com/in/zarifhaikalz',
-    'color: #2563eb; font-size: 12px; font-family: monospace;'
+    'color: #d4d4d4; font-size: 12px; font-family: monospace;'
 );

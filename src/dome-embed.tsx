@@ -38,18 +38,7 @@ const skillDomeImages = [
 
 function DomeSkillsBlock() {
   const [scale, setScale] = useState(0.55);
-  const [isDark, setIsDark] = useState(
-    () => document.documentElement.getAttribute('data-theme') === 'dark',
-  );
   const sectionRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const obs = new MutationObserver(() => {
-      setIsDark(document.documentElement.getAttribute('data-theme') === 'dark');
-    });
-    obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-    return () => obs.disconnect();
-  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -96,9 +85,8 @@ function DomeSkillsBlock() {
         <div
           className="pointer-events-none absolute inset-0"
           style={{
-            background: isDark
-              ? 'radial-gradient(ellipse at center, transparent 42%, rgba(10, 25, 47, 0.15) 72%, rgba(10, 25, 47, 0.75) 100%)'
-              : 'radial-gradient(ellipse at center, transparent 42%, rgba(100, 255, 218, 0.06) 72%, rgba(17, 34, 64, 0.12) 100%)',
+            background:
+              'radial-gradient(ellipse at center, transparent 42%, rgba(0, 0, 0, 0.2) 72%, rgba(0, 0, 0, 0.82) 100%)',
             maskImage: 'radial-gradient(ellipse at center, black 52%, transparent 88%)',
             WebkitMaskImage: 'radial-gradient(ellipse at center, black 52%, transparent 88%)',
           }}

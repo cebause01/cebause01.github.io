@@ -7,7 +7,7 @@
     <meta name="keywords" content="Zarif Haikal, AI engineer, machine learning, computer vision, portfolio, Malaysia, UiTM, developer">
     <meta name="author" content="Zarif Haikal">
     <meta name="robots" content="index, follow">
-    <meta name="theme-color" content="#050a14">
+    <meta name="theme-color" content="#000000">
     <link rel="canonical" href="https://cebause.one/">
 
     <title>Zarif Haikal | AI &amp; Software Engineer — Portfolio</title>
@@ -29,22 +29,13 @@
     <link rel="icon" href="files/625154.png" type="image/png">
     <link rel="apple-touch-icon" href="files/625154.png">
 
-    <script>
-        (function () {
-            try {
-                var t = localStorage.getItem('theme');
-                if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
-            } catch (e) {}
-        })();
-    </script>
-
     <link rel="preload" href="images/profile-zarif-haikal.jpeg" as="image" fetchpriority="high">
-    <link rel="preload" href="styles.css" as="style">
+    <link rel="preload" href="styles.css?v=11" as="style">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="dome/dome-skills.css?v=3">
+    <link rel="stylesheet" href="styles.css?v=11">
+    <link rel="stylesheet" href="dome/dome-skills.css?v=4">
 
     <script type="application/ld+json">
     {
@@ -84,11 +75,8 @@
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar" id="navbar">
+    <nav class="navbar" id="navbar" aria-label="Main navigation">
         <div class="nav-container">
-            <div class="logo">
-                <span class="logo-text">&lt; ZH &gt;  </span>
-            </div>
             <ul class="nav-menu">
                 <li><a href="#home" class="nav-link active">Home</a></li>
                 <li><a href="#skills" class="nav-link">Skills</a></li>
@@ -97,24 +85,7 @@
                 <li><a href="#experience" class="nav-link">Experience</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
-           
-            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-                <svg class="theme-icon sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="12" cy="12" r="5"></circle>
-                    <line x1="12" y1="1" x2="12" y2="3"></line>
-                    <line x1="12" y1="21" x2="12" y2="23"></line>
-                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                    <line x1="1" y1="12" x2="3" y2="12"></line>
-                    <line x1="21" y1="12" x2="23" y2="12"></line>
-                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                </svg>
-                <svg class="theme-icon moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                </svg>
-            </button>
-            <button class="menu-toggle" id="menuToggle">
+            <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-expanded="false">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -142,7 +113,7 @@
                         focused on machine learning, computer vision, and full-stack delivery of real-world products.
                     </p>
                     <div class="hero-actions">
-                        <a href="files/RESUME_ZARIFHAIKAL.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+                        <a href="files/cv%20zarif.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
                             View Resume
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M7 17L17 7"></path>
@@ -1011,7 +982,7 @@
                         </svg>
                         <span>LinkedIn</span>
                     </a>
-                    <a href="files/RESUME_ZARIFHAIKAL.pdf" target="_blank" rel="noopener noreferrer" class="footer-link">
+                    <a href="files/cv%20zarif.pdf" target="_blank" rel="noopener noreferrer" class="footer-link">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                             <polyline points="14 2 14 8 20 8"></polyline>
@@ -1135,7 +1106,7 @@
         </div>
     </div>
     
-    <script src="dome/dome-skills.js?v=3" defer data-cfasync="false"></script>
-    <script src="script.js?v=3" defer data-cfasync="false"></script>
+    <script src="dome/dome-skills.js?v=4" defer data-cfasync="false"></script>
+    <script src="script.js?v=6" defer data-cfasync="false"></script>
 </body>
 </html>
