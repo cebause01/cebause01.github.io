@@ -41,6 +41,8 @@
 
 html {
     scroll-behavior: smooth;
+    /* Fixed pill nav: anchor jumps and in-page targets stay below the bar */
+    scroll-padding-top: 6.25rem;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -109,7 +111,7 @@ body {
     top: 0;
     left: 0;
     right: 0;
-    z-index: 1000;
+    z-index: 1100;
     padding: 0.85rem 1rem 0;
     background: transparent;
     border: none;
@@ -910,6 +912,18 @@ body {
     align-items: center;
     margin-bottom: 6rem;
     transition: opacity 0.3s ease, transform 0.3s ease;
+    position: relative;
+}
+
+/* Text column paints above image when parallax shifts the image upward */
+.project-content {
+    position: relative;
+    z-index: 2;
+}
+
+.project-image {
+    position: relative;
+    z-index: 1;
 }
 
 .project-item.hidden {
@@ -1022,10 +1036,6 @@ body {
     transform: translateY(-2px);
     border-color: var(--primary-color);
     background: rgba(var(--accent-rgb), 0.05);
-}
-
-.project-image {
-    position: relative;
 }
 
 .placeholder-bg {

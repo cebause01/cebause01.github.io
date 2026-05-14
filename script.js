@@ -307,6 +307,7 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
 
 const projectParallaxStrength = 0.26;
 const projectParallaxMaxShift = 72;
+const narrowViewportForParallax = window.matchMedia('(max-width: 768px)');
 
 const updateHeroParallax = (scrolled) => {
     const heroSection = document.querySelector('.hero');
@@ -321,9 +322,10 @@ const updateHeroParallax = (scrolled) => {
 };
 
 const updateProjectImageParallax = () => {
-    if (prefersReducedMotion.matches) {
+    if (prefersReducedMotion.matches || narrowViewportForParallax.matches) {
         document.querySelectorAll('.project-image .image-container').forEach((el) => {
             el.style.transform = '';
+            el.style.willChange = 'auto';
         });
         return;
     }
@@ -336,18 +338,21 @@ const updateProjectImageParallax = () => {
 
         if (item.classList.contains('hidden')) {
             container.style.transform = '';
+            container.style.willChange = 'auto';
             return;
         }
 
         const rect = container.getBoundingClientRect();
         if (rect.bottom < -80 || rect.top > window.innerHeight + 80) {
             container.style.transform = '';
+            container.style.willChange = 'auto';
             return;
         }
 
         const elCenter = rect.top + rect.height / 2;
         let offset = (elCenter - viewMid) * projectParallaxStrength;
         offset = Math.max(-projectParallaxMaxShift, Math.min(projectParallaxMaxShift, offset));
+        container.style.willChange = 'transform';
         container.style.transform = `translate3d(0, ${offset.toFixed(2)}px, 0)`;
     });
 };
@@ -373,6 +378,10 @@ window.addEventListener('resize', () => {
 }, { passive: true });
 
 prefersReducedMotion.addEventListener('change', () => {
+    updateProjectImageParallax();
+});
+
+narrowViewportForParallax.addEventListener('change', () => {
     updateProjectImageParallax();
 });
 
