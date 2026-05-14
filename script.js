@@ -123,8 +123,14 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// Observe all sections (skip motion-heavy reveal if user prefers reduced motion)
+// Observe all sections except #skills: the React skills dome uses CSS 3D (perspective).
+// An ancestor with transform/opacity breaks 3D rendering in production browsers.
 document.querySelectorAll('section').forEach(section => {
+    if (section.id === 'skills') {
+        section.style.opacity = '1';
+        section.style.transform = 'none';
+        return;
+    }
     if (revealOnScroll) {
         section.style.opacity = '0';
         section.style.transform = 'translateY(30px)';
