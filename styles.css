@@ -562,6 +562,20 @@ body {
     background-color: #fafafa;
 }
 
+.dome-skills-mount {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    min-height: 420px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+}
+
+#dome-skills-root {
+    width: 100%;
+    min-height: 400px;
+}
+
 .section-header {
     display: flex;
     align-items: baseline;
