@@ -196,7 +196,8 @@ if (typingText) {
     const text = 'Zarif Haikal';
     let i = 0;
     const cursor = document.querySelector('.cursor');
-    
+    typingText.textContent = '';
+
     function type() {
         if (i < text.length) {
             typingText.textContent += text.charAt(i);
