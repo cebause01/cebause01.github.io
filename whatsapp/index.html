@@ -21,6 +21,7 @@
 
       <h1 class="name">Zulkifli</h1>
       <p class="tagline">Send us a message on WhatsApp</p>
+      <p id="message-preview" class="message-preview"></p>
 
       <a
         id="whatsapp-btn"
@@ -43,15 +44,27 @@
     const PHONE = "60192794460";
     const DEFAULT_MESSAGE = "tiong3e";
 
-    const params = new URLSearchParams(window.location.search);
-    const message = params.get("text") || params.get("msg") || DEFAULT_MESSAGE;
+    function getMessage() {
+      const searchParams = new URLSearchParams(window.location.search);
+      let message = searchParams.get("text") || searchParams.get("msg");
 
+      if (!message && window.location.hash.length > 1) {
+        const hashParams = new URLSearchParams(window.location.hash.slice(1));
+        message = hashParams.get("text") || hashParams.get("msg");
+      }
+
+      return message || DEFAULT_MESSAGE;
+    }
+
+    const message = getMessage();
     const whatsappUrl =
       "https://api.whatsapp.com/send/?phone=" + PHONE +
       "&text=" + encodeURIComponent(message) +
       "&type=phone_number&app_absent=0";
 
     document.getElementById("whatsapp-btn").href = whatsappUrl;
+    document.getElementById("message-preview").textContent =
+      "Starting message: " + message;
   </script>
 </body>
 </html>

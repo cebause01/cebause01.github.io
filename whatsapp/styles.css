@@ -78,7 +78,14 @@ body {
 .tagline {
   font-size: 0.95rem;
   color: var(--text-muted);
-  margin-bottom: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.message-preview {
+  font-size: 0.85rem;
+  color: var(--whatsapp);
+  margin-bottom: 1.25rem;
+  word-break: break-word;
 }
 
 .whatsapp-btn {
