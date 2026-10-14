@@ -15,22 +15,35 @@ if ! command -v "$AWS_BIN" &> /dev/null; then
   fi
 fi
 
-echo "==> Syncing files to S3 bucket: s3://${BUCKET} (Region: ${REGION})..."
+echo "==> Building minified assets..."
+npx --yes esbuild styles.css --minify --outfile=styles.min.css
+npx --yes esbuild script.js --minify --outfile=script.min.js
+
+echo "==> Syncing static assets to S3 (Cache-Control: 1 year immutable)..."
 "$AWS_BIN" s3 sync . "s3://${BUCKET}" \
   --region "$REGION" \
-  --exclude ".git/*" \
-  --exclude ".agents/*" \
-  --exclude ".gemini/*" \
-  --exclude "node_modules/*" \
-  --exclude "src/*" \
-  --exclude "scripts/*" \
-  --exclude "*.ts" \
-  --exclude "*.json" \
-  --exclude "*.js" \
-  --exclude ".env*" \
-  --exclude ".*" \
+  --exclude "*" \
+  --include "images/*" \
+  --include "files/*" \
+  --include "dome/*" \
+  --include "*.css" \
   --include "script*.js" \
-  --include "dome/*"
+  --include "*.pdf" \
+  --include "*.webp" \
+  --include "*.png" \
+  --include "*.jpg" \
+  --include "*.jpeg" \
+  --include "*.svg" \
+  --cache-control "public, max-age=31536000, immutable"
+
+echo "==> Syncing HTML & root files to S3 (Cache-Control: must-revalidate)..."
+"$AWS_BIN" s3 sync . "s3://${BUCKET}" \
+  --region "$REGION" \
+  --exclude "*" \
+  --include "*.html" \
+  --include "robots.txt" \
+  --include "sitemap.xml" \
+  --cache-control "public, max-age=0, must-revalidate"
 
 echo "==> Creating CloudFront cache invalidation for: ${DISTRIBUTION_ID}..."
 "$AWS_BIN" cloudfront create-invalidation \

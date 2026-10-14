@@ -1,16 +1,4 @@
 // ===================================
-// Navigation Scroll Effect
-// ===================================
-window.addEventListener('scroll', () => {
-    const navbar = document.getElementById('navbar');
-    if (window.scrollY > 100) {
-        navbar.classList.add('scrolled');
-    } else {
-        navbar.classList.remove('scrolled');
-    }
-});
-
-// ===================================
 // Mobile Menu Toggle
 // ===================================
 const navbar = document.getElementById('navbar');
@@ -69,47 +57,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // ===================================
-// Active Navigation Link on Scroll
-// ===================================
-const sections = document.querySelectorAll('section[id]');
-const scrollOffset = 100;
-
-window.addEventListener('scroll', () => {
-    const scrollY = window.pageYOffset;
-    const windowHeight = window.innerHeight;
-    const documentHeight = document.documentElement.scrollHeight;
-
-    sections.forEach((section, index) => {
-        const sectionHeight = section.offsetHeight;
-        const sectionTop = section.offsetTop - scrollOffset;
-        const sectionId = section.getAttribute('id');
-        const isLastSection = index === sections.length - 1;
-
-        if (isLastSection) {
-            // For the last section (contact), check if we're near the bottom of the page
-            const distanceFromBottom = documentHeight - (scrollY + windowHeight);
-            if (distanceFromBottom < 150 || scrollY > sectionTop) {
-                document.querySelectorAll('.nav-link').forEach(link => {
-                    link.classList.remove('active');
-                });
-                const activeLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
-                if (activeLink) {
-                    activeLink.classList.add('active');
-                }
-            }
-        } else if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.classList.remove('active');
-            });
-            const activeLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
-            if (activeLink) {
-                activeLink.classList.add('active');
-            }
-        }
-    });
-});
-
-// ===================================
 // Intersection Observer for Fade-in Animations
 // ===================================
 const observerOptions = {
@@ -130,9 +77,9 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 
 // Observe all sections except #skills: the React skills dome uses CSS 3D (perspective).
-// An ancestor with transform/opacity breaks 3D rendering in production browsers.
+// Observe all sections except #home (in viewport on load) and #skills (3D perspective)
 document.querySelectorAll('section').forEach(section => {
-    if (section.id === 'skills') {
+    if (section.id === 'skills' || section.id === 'home') {
         section.style.opacity = '1';
         section.style.transform = 'none';
         return;
@@ -189,35 +136,12 @@ const createCursor = () => {
 // createCursor();
 
 // ===================================
-// Typing Animation
+// Typing Cursor Effect
 // ===================================
-const typingText = document.querySelector('.typing-text');
-if (typingText) {
-    const text = 'Zarif Haikal';
-    let i = 0;
-    const cursor = document.querySelector('.cursor');
-    typingText.textContent = '';
-
-    function type() {
-        if (i < text.length) {
-            typingText.textContent += text.charAt(i);
-            i++;
-            setTimeout(type, 100);
-        } else {
-            // Ensure cursor keeps blinking after typing completes
-            if (cursor) {
-                cursor.style.animation = 'none';
-                requestAnimationFrame(() => {
-                    cursor.style.animation = 'blink 1s infinite';
-                });
-            }
-        }
-    }
-    
-    // Start typing animation when page loads
-    setTimeout(() => {
-        type();
-    }, 300);
+// Heading text is rendered server-side/HTML for instant LCP and SEO
+const cursor = document.querySelector('.cursor');
+if (cursor) {
+    cursor.style.animation = 'blink 1s infinite';
 }
 
 // ===================================
@@ -232,33 +156,10 @@ const updateCurrentYear = () => {
 updateCurrentYear();
 
 // ===================================
-// Scroll Progress Indicator
+// Scroll Progress & Back to Top (Elements)
 // ===================================
 const scrollProgress = document.getElementById('scrollProgress');
-
-window.addEventListener('scroll', () => {
-    const windowHeight = window.innerHeight;
-    const documentHeight = document.documentElement.scrollHeight;
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    const scrollPercent = (scrollTop / (documentHeight - windowHeight)) * 100;
-    
-    if (scrollProgress) {
-        scrollProgress.style.width = scrollPercent + '%';
-    }
-});
-
-// ===================================
-// Back to Top Button
-// ===================================
 const backToTopButton = document.getElementById('backToTop');
-
-window.addEventListener('scroll', () => {
-    if (window.pageYOffset > 300) {
-        backToTopButton?.classList.add('visible');
-    } else {
-        backToTopButton?.classList.remove('visible');
-    }
-});
 
 backToTopButton?.addEventListener('click', () => {
     window.scrollTo({
@@ -367,25 +268,84 @@ const updateProjectImageParallax = () => {
     });
 };
 
-let parallaxTicking = false;
-const onScrollParallax = () => {
-    const scrolled = window.pageYOffset;
-    updateHeroParallax(scrolled);
+// ===================================
+// Unified Scroll Engine (rAF-throttled, zero forced reflows)
+// ===================================
+const sections = document.querySelectorAll('section[id]');
+let sectionMetrics = [];
 
-    if (!parallaxTicking) {
-        requestAnimationFrame(() => {
-            updateProjectImageParallax();
-            parallaxTicking = false;
-        });
-        parallaxTicking = true;
-    }
+const updateSectionMetrics = () => {
+    const scrollOffset = 100;
+    sectionMetrics = Array.from(sections).map((section, index) => ({
+        id: section.getAttribute('id'),
+        top: section.offsetTop - scrollOffset,
+        height: section.offsetHeight,
+        isLast: index === sections.length - 1
+    }));
+    cachedHeroHeight = 0;
 };
 
-window.addEventListener('scroll', onScrollParallax, { passive: true });
-window.addEventListener('resize', () => {
-    cachedHeroHeight = 0;
-    updateHeroParallax(window.pageYOffset);
+let scrollTicking = false;
+const onScrollUnified = () => {
+    const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
+
+    // 1. Navbar scrolled class
+    if (navbar) {
+        navbar.classList.toggle('scrolled', scrollY > 100);
+    }
+
+    // 2. Back to top visibility
+    if (backToTopButton) {
+        backToTopButton.classList.toggle('visible', scrollY > 300);
+    }
+
+    // 3. Scroll progress
+    if (scrollProgress && documentHeight > windowHeight) {
+        const scrollPercent = (scrollY / (documentHeight - windowHeight)) * 100;
+        scrollProgress.style.width = scrollPercent + '%';
+    }
+
+    // 4. Active nav link (pure cached numbers, 0 forced reflows)
+    let activeId = null;
+    for (let i = 0; i < sectionMetrics.length; i++) {
+        const m = sectionMetrics[i];
+        if (m.isLast) {
+            const distanceFromBottom = documentHeight - (scrollY + windowHeight);
+            if (distanceFromBottom < 150 || scrollY > m.top) {
+                activeId = m.id;
+            }
+        } else if (scrollY > m.top && scrollY <= m.top + m.height) {
+            activeId = m.id;
+        }
+    }
+    if (activeId) {
+        navLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === `#${activeId}`);
+        });
+    }
+
+    // 5. Parallax updates
+    updateHeroParallax(scrollY);
     updateProjectImageParallax();
+
+    scrollTicking = false;
+};
+
+window.addEventListener('scroll', () => {
+    if (!scrollTicking) {
+        requestAnimationFrame(onScrollUnified);
+        scrollTicking = true;
+    }
+}, { passive: true });
+
+window.addEventListener('resize', () => {
+    updateSectionMetrics();
+    if (!scrollTicking) {
+        requestAnimationFrame(onScrollUnified);
+        scrollTicking = true;
+    }
 }, { passive: true });
 
 prefersReducedMotion.addEventListener('change', () => {
@@ -396,16 +356,16 @@ narrowViewportForParallax.addEventListener('change', () => {
     updateProjectImageParallax();
 });
 
-// Initial frame (deferred to avoid layout thrashing during initial paint)
+// Initial measurement and frame (deferred to avoid layout thrashing during initial paint)
 if ('requestIdleCallback' in window) {
     requestIdleCallback(() => {
-        updateHeroParallax(window.pageYOffset);
-        updateProjectImageParallax();
+        updateSectionMetrics();
+        onScrollUnified();
     });
 } else {
     setTimeout(() => {
-        updateHeroParallax(window.pageYOffset);
-        updateProjectImageParallax();
+        updateSectionMetrics();
+        onScrollUnified();
     }, 150);
 }
 

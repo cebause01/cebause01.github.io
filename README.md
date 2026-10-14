@@ -43,12 +43,14 @@ npm run dev
 - **GitHub Pages**: Automatically serves root directory (`index.html`).
 - **Vercel**: Configured via `vercel.json` (`outputDirectory: "."`) to serve root assets after running `npm run build`.
 - **AWS (S3 REST + CloudFront OAC)**:
+  - **Custom Domains:** `https://cebause.one` & `https://www.cebause.one`
+  - **SSL/TLS Certificate:** AWS ACM (`arn:aws:acm:us-east-1:084362065057:certificate/dae5d50b-98d0-43f2-9cd4-eae7c9ab69ef`)
   - **S3 Bucket:** `cebause-site-my-084362065057` (`ap-southeast-5` Malaysia)
   - **Security:** Private bucket (Block Public Access: ON). Direct access is blocked (`403 Forbidden`).
   - **CloudFront OAC:** `cebause-oac` (`E1ZCR9MYQZS3A8`) using SigV4 signing.
   - **CloudFront Function:** `cebause-url-rewrite` (handles subfolder URL & index mapping).
   - **CloudFront Distribution ID:** `E1WS23SL7K4YBT`
-  - **CloudFront URL:** `https://d1h2htnb2ruakd.cloudfront.net`
+  - **CloudFront Default Domain:** `https://d1h2htnb2ruakd.cloudfront.net`
   - **Deploy Command:** `npm run deploy:aws`
 
 
