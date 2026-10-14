@@ -36,6 +36,14 @@ echo "==> Syncing static assets to S3 (Cache-Control: 1 year immutable)..."
   --include "*.svg" \
   --cache-control "public, max-age=31536000, immutable"
 
+echo "==> Enforcing Cache-Control on all existing S3 assets..."
+"$AWS_BIN" s3 cp "s3://${BUCKET}/images/" "s3://${BUCKET}/images/" \
+  --region "$REGION" --recursive --metadata-directive REPLACE \
+  --cache-control "public, max-age=31536000, immutable"
+"$AWS_BIN" s3 cp "s3://${BUCKET}/files/" "s3://${BUCKET}/files/" \
+  --region "$REGION" --recursive --metadata-directive REPLACE \
+  --cache-control "public, max-age=31536000, immutable"
+
 echo "==> Syncing HTML & root files to S3 (Cache-Control: must-revalidate)..."
 "$AWS_BIN" s3 sync . "s3://${BUCKET}" \
   --region "$REGION" \
