@@ -520,6 +520,11 @@ body {
     z-index: 1;
 }
 
+.image-wrapper picture {
+    display: block;
+    width: 100%;
+}
+
 .image-wrapper img {
     width: 100%;
     height: auto;

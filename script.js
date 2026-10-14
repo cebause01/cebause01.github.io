@@ -207,9 +207,9 @@ if (typingText) {
             // Ensure cursor keeps blinking after typing completes
             if (cursor) {
                 cursor.style.animation = 'none';
-                // Force reflow to restart animation
-                cursor.offsetHeight;
-                cursor.style.animation = 'blink 1s infinite';
+                requestAnimationFrame(() => {
+                    cursor.style.animation = 'blink 1s infinite';
+                });
             }
         }
     }
@@ -310,9 +310,18 @@ const projectParallaxStrength = 0.26;
 const projectParallaxMaxShift = 72;
 const narrowViewportForParallax = window.matchMedia('(max-width: 768px)');
 
+let cachedHeroHeight = 0;
+const getHeroHeight = () => {
+    if (!cachedHeroHeight) {
+        const heroSection = document.querySelector('.hero');
+        cachedHeroHeight = heroSection ? heroSection.offsetHeight : 0;
+    }
+    return cachedHeroHeight;
+};
+
 const updateHeroParallax = (scrolled) => {
-    const heroSection = document.querySelector('.hero');
-    if (heroSection && scrolled < heroSection.offsetHeight) {
+    const heroHeight = getHeroHeight();
+    if (heroHeight && scrolled < heroHeight) {
         if (parallaxBg) {
             parallaxBg.style.transform = `translateY(${scrolled * 0.5}px)`;
         }
@@ -374,6 +383,7 @@ const onScrollParallax = () => {
 
 window.addEventListener('scroll', onScrollParallax, { passive: true });
 window.addEventListener('resize', () => {
+    cachedHeroHeight = 0;
     updateHeroParallax(window.pageYOffset);
     updateProjectImageParallax();
 }, { passive: true });
@@ -386,9 +396,18 @@ narrowViewportForParallax.addEventListener('change', () => {
     updateProjectImageParallax();
 });
 
-// Initial frame (hero may be mid-load)
-updateHeroParallax(window.pageYOffset);
-updateProjectImageParallax();
+// Initial frame (deferred to avoid layout thrashing during initial paint)
+if ('requestIdleCallback' in window) {
+    requestIdleCallback(() => {
+        updateHeroParallax(window.pageYOffset);
+        updateProjectImageParallax();
+    });
+} else {
+    setTimeout(() => {
+        updateHeroParallax(window.pageYOffset);
+        updateProjectImageParallax();
+    }, 150);
+}
 
 // ===================================
 // Project Modal
