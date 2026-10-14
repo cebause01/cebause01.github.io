@@ -8,6 +8,7 @@
     "build": "npm run build:dome",
     "build:dome": "vite build --config vite.config.dome.ts",
     "build:react-app": "tsc -b && vite build --config vite.config.ts",
+    "deploy:aws": "bash scripts/deploy-aws.sh",
     "lint": "eslint .",
     "preview": "vite preview"
   },
