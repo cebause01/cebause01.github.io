@@ -910,3 +910,38 @@ console.log(
     '%cConnect with me:\nGitHub: github.com/cebause01\nLinkedIn: linkedin.com/in/zarifhaikalz',
     'color: #d4d4d4; font-size: 12px; font-family: monospace;'
 );
+
+// ===================================
+// Lazy-load 3D Skills Dome on Scroll
+// ===================================
+const domeSkillsRoot = document.getElementById('dome-skills-root');
+if (domeSkillsRoot) {
+    let domeLoaded = false;
+    const loadDome = () => {
+        if (domeLoaded) return;
+        domeLoaded = true;
+
+        const css = document.createElement('link');
+        css.rel = 'stylesheet';
+        css.href = 'dome/dome-skills.css?v=4';
+        document.head.appendChild(css);
+
+        const script = document.createElement('script');
+        script.src = 'dome/dome-skills.js?v=4';
+        script.defer = true;
+        document.body.appendChild(script);
+    };
+
+    if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                observer.disconnect();
+                loadDome();
+            }
+        }, { rootMargin: '300px 0px' });
+        observer.observe(domeSkillsRoot);
+    } else {
+        window.addEventListener('load', loadDome, { once: true });
+    }
+}
+

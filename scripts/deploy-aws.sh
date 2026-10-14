@@ -29,7 +29,7 @@ echo "==> Syncing files to S3 bucket: s3://${BUCKET} (Region: ${REGION})..."
   --exclude "*.js" \
   --exclude ".env*" \
   --exclude ".*" \
-  --include "script.js" \
+  --include "script*.js" \
   --include "dome/*"
 
 echo "==> Creating CloudFront cache invalidation for: ${DISTRIBUTION_ID}..."

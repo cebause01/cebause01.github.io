@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "npx --yes serve . -p 5173",
-    "build": "npm run build:dome",
+    "build": "npm run build:dome && npx esbuild styles.css --minify --outfile=styles.min.css && npx esbuild script.js --minify --outfile=script.min.js",
     "build:dome": "vite build --config vite.config.dome.ts",
     "build:react-app": "tsc -b && vite build --config vite.config.ts",
     "deploy:aws": "bash scripts/deploy-aws.sh",
