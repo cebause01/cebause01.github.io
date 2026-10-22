@@ -36,7 +36,7 @@ const skillDomeImages = [
   { src: Github, alt: 'GitHub' },
 ];
 
-function DomeSkillsBlock() {
+export function DomeSkillsBlock() {
   const [scale, setScale] = useState(0.55);
   const sectionRef = useRef<HTMLDivElement>(null);
 
