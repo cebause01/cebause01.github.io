@@ -1,0 +1,47 @@
+{
+    "Comment": "Security headers for cebause.one portfolio",
+    "Name": "CebauseSecurityHeaders",
+    "SecurityHeadersConfig": {
+        "XSSProtection": {
+            "Override": true,
+            "Protection": true,
+            "ModeBlock": true
+        },
+        "FrameOptions": {
+            "Override": true,
+            "FrameOption": "DENY"
+        },
+        "ReferrerPolicy": {
+            "Override": true,
+            "ReferrerPolicy": "strict-origin-when-cross-origin"
+        },
+        "ContentSecurityPolicy": {
+            "Override": true,
+            "ContentSecurityPolicy": "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self';"
+        },
+        "ContentTypeOptions": {
+            "Override": true
+        },
+        "StrictTransportSecurity": {
+            "Override": true,
+            "IncludeSubdomains": true,
+            "Preload": true,
+            "AccessControlMaxAgeSec": 31536000
+        }
+    },
+    "CustomHeadersConfig": {
+        "Quantity": 2,
+        "Items": [
+            {
+                "Header": "Cross-Origin-Opener-Policy",
+                "Value": "same-origin",
+                "Override": true
+            },
+            {
+                "Header": "Permissions-Policy",
+                "Value": "camera=(), microphone=(), geolocation=()",
+                "Override": true
+            }
+        ]
+    }
+}

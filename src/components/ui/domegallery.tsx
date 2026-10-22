@@ -1,47 +1,6 @@
 import { useEffect, useMemo, useRef, useCallback } from "react";
 import { useGesture } from "@use-gesture/react";
 
-// Import all techstack icons
-import { techStackIcons } from "../../assets/techstack";
-
-// Destructure for backwards compatibility with existing code
-const {
-    AWSLight: AWS,
-    Bootstrap,
-    C,
-    CPP,
-    CS,
-    CSS,
-    DartLight: Dart,
-    Docker,
-    Electron,
-    ExpressJSLight: ExpressJS,
-    FlutterLight: Flutter,
-    GithubLight: Github,
-    GraphQLLight: GraphQL,
-    HTML,
-    JavaLight: Java,
-    JavaScript,
-    JQuery,
-    LaTeXLight: LaTeX,
-    MaterialUILight: MaterialUI,
-    MongoDB,
-    NodeJSLight: NodeJS,
-    NotionLight: Notion,
-    NpmLight: Npm,
-    Postman,
-    ReactLight: ReactIcon,
-    RedisLight: Redis,
-    StackOverflowLight: StackOverflow,
-    TailwindCSSLight: TailwindCSS,
-    TensorFlowLight: TensorFlow,
-    ThreeJSLight: ThreeJS,
-    TypeScript,
-    UnityLight: Unity,
-    VercelLight: Vercel,
-    ViteLight: Vite,
-} = techStackIcons;
-
 type ImageItem = string | { src: string; alt?: string };
 
 type DomeGalleryProps = {
@@ -73,42 +32,7 @@ type ItemDef = {
     sizeY: number;
 };
 
-const DEFAULT_IMAGES: ImageItem[] = [
-    { src: JavaScript, alt: "JavaScript" },
-    { src: TypeScript, alt: "TypeScript" },
-    { src: NodeJS, alt: "Node.js" },
-    { src: HTML, alt: "HTML" },
-    { src: CSS, alt: "CSS" },
-    { src: Unity, alt: "Unity" },
-    { src: TailwindCSS, alt: "Tailwind CSS" },
-    { src: MongoDB, alt: "MongoDB" },
-    { src: ExpressJS, alt: "Express.js" },
-    { src: Docker, alt: "Docker" },
-    { src: GraphQL, alt: "GraphQL" },
-    { src: Redis, alt: "Redis" },
-    { src: C, alt: "C" },
-    { src: Flutter, alt: "Flutter" },
-    { src: Dart, alt: "Dart" },
-    { src: MaterialUI, alt: "Material UI" },
-    { src: Electron, alt: "Electron" },
-    { src: TensorFlow, alt: "TensorFlow" },
-    { src: ThreeJS, alt: "Three.js" },
-    { src: Vite, alt: "Vite" },
-    { src: Vercel, alt: "Vercel" },
-    { src: Bootstrap, alt: "Bootstrap" },
-    { src: JQuery, alt: "jQuery" },
-    { src: Java, alt: "Java" },
-    { src: ReactIcon, alt: "React" },
-    { src: CS, alt: "C#" },
-    { src: AWS, alt: "AWS" },
-    { src: Github, alt: "GitHub" },
-    { src: Postman, alt: "Postman" },
-    { src: CPP, alt: "C++" },
-    { src: Npm, alt: "npm" },
-    { src: Notion, alt: "Notion" },
-    { src: LaTeX, alt: "LaTeX" },
-    { src: StackOverflow, alt: "Stack Overflow" },
-];
+const DEFAULT_IMAGES: ImageItem[] = [];
 
 const DEFAULTS = {
     maxVerticalRotationDeg: 5,
@@ -748,20 +672,18 @@ export default function DomeGallery({
                 const tempHeight = openedImageHeight || `${frameR.height}px`;
                 overlay.style.width = tempWidth;
                 overlay.style.height = tempHeight;
-                const newRect = overlay.getBoundingClientRect();
-                overlay.style.width = frameR.width + "px";
-                overlay.style.height = frameR.height + "px";
-                void overlay.offsetWidth;
-                overlay.style.transition = `left ${enlargeTransitionMs}ms ease, top ${enlargeTransitionMs}ms ease, width ${enlargeTransitionMs}ms ease, height ${enlargeTransitionMs}ms ease`;
                 const centeredLeft =
                     frameR.left - mainR.left + (frameR.width - newRect.width) / 2;
                 const centeredTop =
                     frameR.top - mainR.top + (frameR.height - newRect.height) / 2;
                 requestAnimationFrame(() => {
-                    overlay.style.left = `${centeredLeft}px`;
-                    overlay.style.top = `${centeredTop}px`;
-                    overlay.style.width = tempWidth;
-                    overlay.style.height = tempHeight;
+                    overlay.style.transition = `left ${enlargeTransitionMs}ms ease, top ${enlargeTransitionMs}ms ease, width ${enlargeTransitionMs}ms ease, height ${enlargeTransitionMs}ms ease`;
+                    requestAnimationFrame(() => {
+                        overlay.style.left = `${centeredLeft}px`;
+                        overlay.style.top = `${centeredTop}px`;
+                        overlay.style.width = tempWidth;
+                        overlay.style.height = tempHeight;
+                    });
                 });
                 const cleanupSecond = () => {
                     overlay.removeEventListener("transitionend", cleanupSecond);
@@ -814,6 +736,8 @@ export default function DomeGallery({
     }
     
     .sphere-item {
+      min-width: 48px;
+      min-height: 48px;
       width: calc(var(--item-width) * var(--item-size-x));
       height: calc(var(--item-height) * var(--item-size-y));
       position: absolute;
@@ -842,19 +766,11 @@ export default function DomeGallery({
       }
     }
     
-    // body.dg-scroll-lock {
-    //   position: fixed !important;
-    //   top: 0;
-    //   left: 0;
-    //   width: 100% !important;
-    //   height: 100% !important;
-    //   overflow: hidden !important;
-    //   touch-action: none !important;
-    //   overscroll-behavior: contain !important;
-    // }
     .item__image {
       position: absolute;
       inset: 10px;
+      min-width: 48px;
+      min-height: 48px;
       border-radius: var(--tile-radius, 12px);
       overflow: hidden;
       cursor: pointer;
@@ -868,6 +784,8 @@ export default function DomeGallery({
     .item__image--reference {
       position: absolute;
       inset: 10px;
+      min-width: 48px;
+      min-height: 48px;
       pointer-events: none;
     }
   `;
