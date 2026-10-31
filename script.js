@@ -389,7 +389,7 @@ const projectData = {
             'Secure healthcare data management',
             'Real-time monitoring and alert system'
         ],
-        tech: ['[Tool 1]', '[Tool 2]', '[Tool 3]', '[Tool 4]'],
+        tech: ['LLM API', 'Laravel'],
         challenges: 'Developing an AI system that can accurately assess patient conditions from weekly reports while ensuring data privacy and compliance with healthcare regulations. The challenge involved creating reliable assessment algorithms and integrating them seamlessly into the clinical workflow to provide actionable insights for doctors.',
         liveUrl: 'https://idialysis.my',
         repoUrl: null
@@ -397,7 +397,7 @@ const projectData = {
     'sdip': {
         tag: 'Government & Public Health',
         title: 'SDIP — Sistem Digital Inspektorat dan Perundangan',
-        description: 'SDIP is an integrated system for the Unit of Inspectorate and Legislation (Unit Inspektorat dan Perundangan), Ministry of Health Malaysia (KKM). It digitises public health enforcement—covering audit, investigation, inspection, and notice management—so operations are faster, more transparent, and easier to monitor across the network of JKN and PKD.',
+        description: 'SDIP is an integrated system for the Unit of Inspectorate and Legislation (Unit Inspektorat dan Perundangan), Ministry of Health Malaysia (KKM). It digitises public health enforcement—covering audit, investigation, inspection, and notice management—and is designed to make operations faster, more transparent, and easier to monitor across the network of JKN and PKD.',
         features: [
             'Unified digital workflows for inspectorate, audit, investigation, and enforcement',
             'End-to-end notice handling and monitoring with reduced reliance on manual forms',
@@ -406,7 +406,7 @@ const projectData = {
             'Real-time, centralised visibility for operational coordination',
             'Supports national digital transformation goals for public health'
         ],
-        tech: ['[Tool 1]', '[Tool 2]', '[Tool 3]', '[Tool 4]'],
+        tech: ['LLM', 'OCR', 'Laravel'],
         challenges: 'Delivering a sector-wide platform means balancing strict governance and usability, integrating with established KKM processes, and ensuring the product can evolve as regulations and operational needs change—all while keeping enforcement data reliable and traceable.',
         liveUrl: 'https://sdip-home.gense.my/',
         repoUrl: null
