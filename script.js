@@ -171,32 +171,35 @@ backToTopButton?.addEventListener('click', () => {
 // ===================================
 // Project Filters
 // ===================================
+// Filters apply to the "More projects" grid only; featured rows always stay visible.
 const filterButtons = document.querySelectorAll('.filter-btn');
-const projectItems = document.querySelectorAll('.project-item');
+const projectCards = document.querySelectorAll('.project-card');
+const projectsFilterStatus = document.getElementById('projectsFilterStatus');
 
 filterButtons.forEach(button => {
     button.addEventListener('click', () => {
-        // Remove active class from all buttons
-        filterButtons.forEach(btn => btn.classList.remove('active'));
-        // Add active class to clicked button
+        filterButtons.forEach(btn => {
+            btn.classList.remove('active');
+            btn.setAttribute('aria-pressed', 'false');
+        });
         button.classList.add('active');
-        
+        button.setAttribute('aria-pressed', 'true');
+
         const filterValue = button.getAttribute('data-filter');
-        
-        projectItems.forEach(item => {
-            if (filterValue === 'all') {
-                item.classList.remove('hidden');
-            } else {
-                const categories = item.getAttribute('data-category');
-                if (categories && categories.includes(filterValue)) {
-                    item.classList.remove('hidden');
-                } else {
-                    item.classList.add('hidden');
-                }
-            }
+        let visibleCount = 0;
+
+        projectCards.forEach(card => {
+            const categories = (card.getAttribute('data-category') || '').split(' ');
+            const visible = filterValue === 'all' || categories.includes(filterValue);
+            card.classList.toggle('hidden', !visible);
+            if (visible) visibleCount++;
         });
 
-        requestAnimationFrame(() => updateProjectImageParallax());
+        if (projectsFilterStatus) {
+            const label = filterValue === 'all' ? 'all categories' : button.textContent.trim();
+            projectsFilterStatus.textContent =
+                `Showing ${visibleCount} of ${projectCards.length} projects: ${label}`;
+        }
     });
 });
 
@@ -234,7 +237,7 @@ const updateHeroParallax = (scrolled) => {
 
 const updateProjectImageParallax = () => {
     if (prefersReducedMotion.matches || narrowViewportForParallax.matches) {
-        document.querySelectorAll('.project-image .image-container').forEach((el) => {
+        document.querySelectorAll('.projects-featured .project-image .image-container').forEach((el) => {
             el.style.transform = '';
             el.style.willChange = 'auto';
         });
@@ -243,15 +246,10 @@ const updateProjectImageParallax = () => {
 
     const viewMid = window.innerHeight * 0.5;
 
-    document.querySelectorAll('.project-item').forEach((item) => {
+    // Parallax only on the featured case-study rows, not the card grid
+    document.querySelectorAll('.projects-featured .project-item').forEach((item) => {
         const container = item.querySelector('.project-image .image-container');
         if (!container) return;
-
-        if (item.classList.contains('hidden')) {
-            container.style.transform = '';
-            container.style.willChange = 'auto';
-            return;
-        }
 
         const rect = container.getBoundingClientRect();
         if (rect.bottom < -80 || rect.top > window.innerHeight + 80) {
@@ -381,7 +379,7 @@ const projectDetailsButtons = document.querySelectorAll('.project-details-btn');
 const projectData = {
     'idialysis': {
         tag: 'AI Healthcare',
-        title: 'iDialysis - PD Patient Management System',
+        title: 'iDialysis — PD Patient Management System',
         description: 'A digital healthcare platform for Peritoneal Dialysis (PD) patient reporting with AI-powered weekly assessments. The system automates patient monitoring and provides doctors with timely updates and insights for better patient care.',
         features: [
             'Digital patient reporting system for PD patients',
@@ -391,9 +389,10 @@ const projectData = {
             'Secure healthcare data management',
             'Real-time monitoring and alert system'
         ],
-        tech: ['AI/ML', 'Healthcare Technology', 'Data Analytics', 'Patient Monitoring', 'Web Application', 'Machine Learning'],
+        tech: ['[Tool 1]', '[Tool 2]', '[Tool 3]', '[Tool 4]'],
         challenges: 'Developing an AI system that can accurately assess patient conditions from weekly reports while ensuring data privacy and compliance with healthcare regulations. The challenge involved creating reliable assessment algorithms and integrating them seamlessly into the clinical workflow to provide actionable insights for doctors.',
-        github: 'https://idialysis.my'
+        liveUrl: 'https://idialysis.my',
+        repoUrl: null
     },
     'sdip': {
         tag: 'Government & Public Health',
@@ -407,9 +406,10 @@ const projectData = {
             'Real-time, centralised visibility for operational coordination',
             'Supports national digital transformation goals for public health'
         ],
-        tech: ['Web Platform', 'Public Health IT', 'Digital Transformation', 'Process Automation', 'System Integration', 'Government Sector'],
+        tech: ['[Tool 1]', '[Tool 2]', '[Tool 3]', '[Tool 4]'],
         challenges: 'Delivering a sector-wide platform means balancing strict governance and usability, integrating with established KKM processes, and ensuring the product can evolve as regulations and operational needs change—all while keeping enforcement data reliable and traceable.',
-        github: 'https://sdip-home.gense.my/'
+        liveUrl: 'https://sdip-home.gense.my/',
+        repoUrl: null
     },
     'ditosis': {
         tag: 'Marketing Site',
@@ -427,7 +427,7 @@ const projectData = {
         tech: ['HTML', 'CSS', 'JavaScript', 'Node.js', 'GitHub Pages', 'Responsive Design'],
         challenges: 'Balancing a bold marketing aesthetic with performance and readability—keeping animations smooth across devices while keeping the codebase simple enough to host as static assets and iterate on copy and layout quickly.',
         liveUrl: 'https://ditosis.gense.my/',
-        github: 'https://github.com/cebause01/Ditosis'
+        repoUrl: 'https://github.com/cebause01/Ditosis'
     },
     'multi-llm': {
         tag: 'AI/ML',
@@ -443,11 +443,11 @@ const projectData = {
         ],
         tech: ['React', 'Vite', 'Node.js', 'Express', 'OpenRouter API', 'JavaScript', 'CSS'],
         challenges: 'Implementing a system that efficiently handles multiple concurrent API calls to different AI models while maintaining performance and user experience. The challenge involved creating a robust judging mechanism that could fairly evaluate responses from different models and handle various input types including text, images, and files.',
-        github: 'https://github.com/cebause01/Multi-LLM'
+        repoUrl: 'https://github.com/cebause01/Multi-LLM'
     },
     'llm-finetuning': {
         tag: 'AI Fine-Tuning',
-        title: 'LLM Fine-Tuning & Model Deployment',
+        title: 'LLM Fine-Tuning & Model Deployment (AuraAI)',
         description: 'Specialized in fine-tuning large language models using Unsloth for efficient training, converting models to GGUF format, and deploying them locally via Ollama. Published multiple custom models on Hugging Face including the AuraAI series (AuraAI-A through AuraAI-D) and ZarifAI.',
         features: [
             'Fine-tuning LLMs using Unsloth for faster and more memory-efficient training',
@@ -459,7 +459,7 @@ const projectData = {
         ],
         tech: ['Unsloth', 'GGUF', 'Ollama', 'Hugging Face', 'PyTorch', 'Transformers', 'Model Fine-Tuning', 'LLM'],
         challenges: 'Fine-tuning large language models efficiently while managing computational resources and memory constraints. The challenge involved learning Unsloth optimization techniques, understanding GGUF conversion processes, and ensuring models work seamlessly with Ollama for local deployment. Balancing model performance, size, and inference speed was crucial for creating usable models.',
-        github: 'https://huggingface.co/zarifhaikal01'
+        repoUrl: 'https://huggingface.co/zarifhaikal01'
     },
     'sign-language': {
         tag: 'Computer Vision',
@@ -475,7 +475,7 @@ const projectData = {
         ],
         tech: ['YOLOv8', 'OpenCV', 'Python', 'PyTorch', 'Roboflow', 'NumPy', 'Computer Vision'],
         challenges: 'The main challenge was collecting and annotating a diverse dataset of sign language gestures. This was solved by implementing a systematic data collection process and using Roboflow for data augmentation to improve model robustness across different lighting conditions and hand positions.',
-        github: 'https://github.com/cebause01/RT-SignLanguage-YOLOv8'
+        repoUrl: 'https://github.com/cebause01/RT-SignLanguage-YOLOv8'
     },
     'hospital-db': {
         tag: 'Database Systems',
@@ -491,7 +491,7 @@ const projectData = {
         ],
         tech: ['Oracle Database', 'SQL', 'PL/SQL', 'Database Design', 'System Architecture', 'Data Security'],
         challenges: 'Designing a scalable database schema that could handle complex relationships between patients, doctors, appointments, and medical records while maintaining data integrity and security. Implemented proper normalization and indexing strategies to optimize query performance.',
-        github: null
+        repoUrl: null
     },
     'gmaps-scraper': {
         tag: 'Web Scraping',
@@ -507,7 +507,7 @@ const projectData = {
         ],
         tech: ['JavaScript', 'Node.js', 'Puppeteer', 'Web Scraping', 'Automation', 'Data Extraction'],
         challenges: 'Handling dynamic content loading and anti-scraping measures. Implemented smart delays, user-agent rotation, and proper DOM waiting mechanisms to ensure reliable data extraction while respecting website policies.',
-        github: 'https://github.com/cebause01/GMap_Scrape'
+        repoUrl: 'https://github.com/cebause01/GMap_Scrape'
     },
     'telegram-scraper': {
         tag: 'Data Processing',
@@ -523,7 +523,7 @@ const projectData = {
         ],
         tech: ['Python', 'Telethon', 'Telegram API', 'asyncio', 'API Integration', 'Automation'],
         challenges: 'Managing API rate limits and handling large volumes of data efficiently. Implemented asynchronous processing and batch operations to improve performance while staying within Telegram API constraints.',
-        github: 'https://github.com/cebause01/Scrape_Tele'
+        repoUrl: 'https://github.com/cebause01/Scrape_Tele'
     },
     'pdf-processor': {
         tag: 'PDF Processing',
@@ -539,114 +539,137 @@ const projectData = {
         ],
         tech: ['Python', 'PyPDF2', 'PDF Libraries', 'Text Extraction', 'Document Processing', 'OCR'],
         challenges: 'Handling various PDF formats and ensuring text extraction accuracy across different document types. Implemented multiple extraction strategies and fallback mechanisms to handle edge cases and corrupted files.',
-        github: 'https://github.com/cebause01/PDFProcessor'
+        repoUrl: 'https://github.com/cebause01/PDFProcessor'
     }
 };
 
-// Open modal
+const externalLinkSvg = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+        <polyline points="15 3 21 3 21 9"></polyline>
+        <line x1="10" y1="14" x2="21" y2="3"></line>
+    </svg>`;
+const githubSvg = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path>
+        <path d="M9 18c-4.51 2-5-2-7-2"></path>
+    </svg>`;
+
+const repoLinkLabel = (url) => {
+    if (url.includes('github.com')) return 'View on GitHub';
+    if (url.includes('huggingface.co')) return 'View on Hugging Face';
+    return 'View Code';
+};
+
+const setModalLink = (link, url, iconSvg, label, ariaLabel) => {
+    if (!link) return;
+    if (url) {
+        link.href = url;
+        link.innerHTML = `${iconSvg} ${label}`;
+        link.setAttribute('aria-label', ariaLabel);
+        link.hidden = false;
+    } else {
+        link.removeAttribute('href');
+        link.removeAttribute('aria-label');
+        link.hidden = true;
+    }
+};
+
+const focusableSelector = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+let modalTrigger = null;
+
+const getModalFocusable = () =>
+    Array.from(modal.querySelectorAll(focusableSelector)).filter(el => !el.hidden && el.offsetParent !== null);
+
+const openProjectModal = (projectId, trigger) => {
+    const project = projectData[projectId];
+    if (!project || !modal) return;
+
+    modal.querySelector('.modal-tag').textContent = project.tag;
+    modal.querySelector('.modal-title').textContent = project.title;
+    modal.querySelector('.modal-description').textContent = project.description;
+
+    const featuresList = modal.querySelector('.modal-features-list');
+    featuresList.innerHTML = '';
+    project.features.forEach(feature => {
+        const li = document.createElement('li');
+        li.textContent = feature;
+        featuresList.appendChild(li);
+    });
+
+    const techStack = modal.querySelector('.modal-tech-stack');
+    techStack.innerHTML = '';
+    project.tech.forEach(tech => {
+        const span = document.createElement('span');
+        span.textContent = tech;
+        techStack.appendChild(span);
+    });
+
+    modal.querySelector('.modal-challenges-text').textContent = project.challenges;
+
+    setModalLink(modal.querySelector('.modal-live-link'), project.liveUrl, externalLinkSvg, 'Visit Site',
+        `Visit Site: ${project.title}`);
+    const repoUrl = project.repoUrl;
+    setModalLink(
+        modal.querySelector('.modal-github-link'),
+        repoUrl,
+        repoUrl && repoUrl.includes('github.com') ? githubSvg : externalLinkSvg,
+        repoUrl ? repoLinkLabel(repoUrl) : '',
+        repoUrl ? `${repoLinkLabel(repoUrl)}: ${project.title}` : ''
+    );
+    const footer = modal.querySelector('.modal-footer');
+    if (footer) footer.hidden = !project.liveUrl && !repoUrl;
+
+    modalTrigger = trigger || document.activeElement;
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    modal.querySelector('.modal-content').scrollTop = 0;
+    modalClose?.focus();
+};
+
 projectDetailsButtons.forEach(button => {
     button.addEventListener('click', () => {
-        const projectId = button.getAttribute('data-project');
-        const project = projectData[projectId];
-        
-        if (project && modal) {
-            // Populate modal with project data
-            modal.querySelector('.modal-tag').textContent = project.tag;
-            modal.querySelector('.modal-title').textContent = project.title;
-            modal.querySelector('.modal-description').textContent = project.description;
-            
-            // Features list
-            const featuresList = modal.querySelector('.modal-features-list');
-            featuresList.innerHTML = '';
-            project.features.forEach(feature => {
-                const li = document.createElement('li');
-                li.textContent = feature;
-                featuresList.appendChild(li);
-            });
-            
-            // Tech stack
-            const techStack = modal.querySelector('.modal-tech-stack');
-            techStack.innerHTML = '';
-            project.tech.forEach(tech => {
-                const span = document.createElement('span');
-                span.textContent = tech;
-                techStack.appendChild(span);
-            });
-            
-            // Challenges
-            modal.querySelector('.modal-challenges-text').textContent = project.challenges;
-            
-            // Optional live site + GitHub / external link
-            const liveLink = modal.querySelector('.modal-live-link');
-            const externalLinkSvg = `
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                            <polyline points="15 3 21 3 21 9"></polyline>
-                            <line x1="10" y1="14" x2="21" y2="3"></line>
-                        </svg>
-                        Visit Site`;
-
-            if (liveLink) {
-                if (project.liveUrl) {
-                    liveLink.href = project.liveUrl;
-                    liveLink.style.display = 'inline-flex';
-                    liveLink.removeAttribute('aria-hidden');
-                    liveLink.setAttribute('aria-label', `Visit ${project.title} live website`);
-                    liveLink.innerHTML = externalLinkSvg;
-                } else {
-                    liveLink.style.display = 'none';
-                    liveLink.setAttribute('aria-hidden', 'true');
-                    liveLink.removeAttribute('aria-label');
-                }
-            }
-
-            const githubLink = modal.querySelector('.modal-github-link');
-            if (project.github) {
-                githubLink.href = project.github;
-                githubLink.style.display = 'inline-flex';
-                const isGh = project.github.includes('github.com');
-                githubLink.setAttribute('aria-label', isGh 
-                    ? `View ${project.title} repository on GitHub` 
-                    : `View ${project.title} external website`);
-                // Update link text and icon based on URL
-                if (isGh) {
-                    githubLink.innerHTML = `
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path>
-                                <path d="M9 18c-4.51 2-5-2-7-2"></path>
-                            </svg>
-                            View on GitHub
-                        `;
-                } else {
-                    githubLink.innerHTML = externalLinkSvg;
-                }
-            } else {
-                githubLink.style.display = 'none';
-                githubLink.removeAttribute('aria-label');
-            }
-            
-            // Show modal
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
+        openProjectModal(button.getAttribute('data-project'), button);
     });
 });
 
-// Close modal
 const closeModal = () => {
-    if (modal) {
-        modal.classList.remove('active');
-        document.body.style.overflow = '';
+    if (!modal || !modal.classList.contains('active')) return;
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+    if (modalTrigger && typeof modalTrigger.focus === 'function') {
+        modalTrigger.focus();
     }
+    modalTrigger = null;
 };
 
 modalClose?.addEventListener('click', closeModal);
 modalOverlay?.addEventListener('click', closeModal);
 
-// Close modal on Escape key
+// Escape closes; Tab / Shift+Tab stay inside the dialog
 document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal?.classList.contains('active')) {
+    if (!modal?.classList.contains('active')) return;
+
+    if (e.key === 'Escape') {
         closeModal();
+        return;
+    }
+
+    if (e.key === 'Tab') {
+        const focusable = getModalFocusable();
+        if (focusable.length === 0) {
+            e.preventDefault();
+            return;
+        }
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey && (document.activeElement === first || !modal.contains(document.activeElement))) {
+            e.preventDefault();
+            last.focus();
+        } else if (!e.shiftKey && (document.activeElement === last || !modal.contains(document.activeElement))) {
+            e.preventDefault();
+            first.focus();
+        }
     }
 });
 
