@@ -459,7 +459,9 @@ const projectData = {
         ],
         tech: ['Unsloth', 'GGUF', 'Ollama', 'Hugging Face', 'PyTorch', 'Transformers', 'Model Fine-Tuning', 'LLM'],
         challenges: 'Fine-tuning large language models efficiently while managing computational resources and memory constraints. The challenge involved learning Unsloth optimization techniques, understanding GGUF conversion processes, and ensuring models work seamlessly with Ollama for local deployment. Balancing model performance, size, and inference speed was crucial for creating usable models.',
-        repoUrl: 'https://huggingface.co/zarifhaikal01'
+        liveUrl: 'https://huggingface.co/zarifhaikal01',
+        liveLabel: 'View on Hugging Face',
+        repoUrl: 'https://github.com/cebause01/whatsapp-ai-training'
     },
     'sign-language': {
         tag: 'Computer Vision',
@@ -507,7 +509,7 @@ const projectData = {
         ],
         tech: ['JavaScript', 'Node.js', 'Puppeteer', 'Web Scraping', 'Automation', 'Data Extraction'],
         challenges: 'Handling dynamic content loading and anti-scraping measures. Implemented smart delays, user-agent rotation, and proper DOM waiting mechanisms to ensure reliable data extraction while respecting website policies.',
-        repoUrl: 'https://github.com/cebause01/GMap_Scrape'
+        repoUrl: null
     },
     'telegram-scraper': {
         tag: 'Data Processing',
@@ -523,7 +525,7 @@ const projectData = {
         ],
         tech: ['Python', 'Telethon', 'Telegram API', 'asyncio', 'API Integration', 'Automation'],
         challenges: 'Managing API rate limits and handling large volumes of data efficiently. Implemented asynchronous processing and batch operations to improve performance while staying within Telegram API constraints.',
-        repoUrl: 'https://github.com/cebause01/Scrape_Tele'
+        repoUrl: null
     },
     'pdf-processor': {
         tag: 'PDF Processing',
@@ -540,6 +542,90 @@ const projectData = {
         tech: ['Python', 'PyPDF2', 'PDF Libraries', 'Text Extraction', 'Document Processing', 'OCR'],
         challenges: 'Handling various PDF formats and ensuring text extraction accuracy across different document types. Implemented multiple extraction strategies and fallback mechanisms to handle edge cases and corrupted files.',
         repoUrl: 'https://github.com/cebause01/PDFProcessor'
+    },
+    'gizmok': {
+        tag: 'AI/ML',
+        title: 'Gizmok: AI Learning Platform',
+        description: 'A dark-themed study platform that turns uploaded PDFs into AI-generated flashcards and quizzes. It combines Gizmo-style flashcard learning with GoodNotes-style digital note-taking, and ranks students on university leaderboards.',
+        features: [
+            'Upload a PDF to generate flashcard decks and quiz questions with an LLM',
+            'Study mode with card flipping, difficulty ratings and spaced repetition',
+            'Handwritten and typed notes on blank, lined, grid or dotted paper, with PNG export',
+            'Points for correct quiz answers and a per-university leaderboard',
+            'Sign-up with university selection and a customizable student card',
+            'Responsive dark UI built for mobile study'
+        ],
+        tech: ['React', 'TypeScript', 'Vite', 'React Router', 'Groq LLM API', 'LocalStorage'],
+        challenges: 'Getting useful study material out of arbitrary PDFs: the app extracts the key concepts from the document text and shapes them into question/answer pairs and quiz options, while keeping every user\'s decks, notes and scores isolated in client-side storage.',
+        liveUrl: 'https://gizmok.vercel.app',
+        repoUrl: 'https://github.com/cebause01/gizmok-learning-platform'
+    },
+    'cedge': {
+        tag: 'Full-Stack SaaS',
+        title: 'Cedge: Hybrid Accounting Platform',
+        description: 'A Malaysia-first MERN accounting SaaS that keeps personal and company ledgers strictly separate under one user identity. It covers compliance-aware expense handling, document ingestion workflows and management reporting, in a monorepo with a shared TypeScript package for the API and the web dashboard.',
+        features: [
+            'Separate personal and company ledgers with smart entity switching',
+            'Journals post only through one service that checks debits equal credits and accounts belong to the entity',
+            'Malaysia expense rules that record the rule version, evidence needed and any override reason',
+            'Role-based access for owner, accountant, approver and webmaster accounts',
+            'Quick-log, compliance queue, management reports and tax center screens',
+            'Shared Zod request schemas, DTOs and chart of accounts across API and web'
+        ],
+        tech: ['MongoDB', 'Express', 'React', 'Node.js', 'TypeScript', 'Zod', 'Vite', 'Mongoose'],
+        challenges: 'Accounting data has to stay correct and auditable. The platform routes every journal through a single validated posting path, builds reports only from posted journals, and stores the reasoning behind each expense decision so an accountant can review it before tax filing.',
+        repoUrl: 'https://github.com/cebause01/cedge'
+    },
+    'turhr': {
+        tag: 'Full-Stack',
+        title: 'TurHR: HR Management System',
+        description: 'A full-stack HR management system with an HTML/Tailwind frontend and a Node.js/Express REST API backed by MongoDB. The frontend and the API live in separate repositories.',
+        features: [
+            'Role-based access control with 5 role levels and role-aware navigation',
+            'Payroll processing',
+            'Attendance tracking with check-in and check-out',
+            'Employee directory with search and filters',
+            'Project assignment and employee messaging',
+            'Dashboard with analytics charts and email invitations'
+        ],
+        tech: ['Node.js', 'Express', 'MongoDB', 'Mongoose', 'JWT', 'Tailwind CSS', 'JavaScript'],
+        challenges: 'Enforcing five permission levels consistently on both sides: the API checks roles in its auth middleware, and the frontend builds its navigation from the same roles so users only see the pages they can use.',
+        liveUrl: 'https://github.com/cebause01/turhr-api',
+        liveLabel: 'View API on GitHub',
+        repoUrl: 'https://github.com/cebause01/turhr'
+    },
+    'kampuskafe': {
+        tag: 'Progressive Web App',
+        title: 'KampusKafe (LenduEats): Campus Food Ordering PWA',
+        description: 'A mobile-first, installable Progressive Web App for UiTM Lendu students to order food from 8 campus cafés, pay with a student wallet or by scanning a QR code, and collect loyalty points. The live demo has a public demo account.',
+        features: [
+            'Ordering across 8 campus cafés with delivery or pickup',
+            'Student wallet with simulated FPX and Touch \'n Go top-ups',
+            'QR scan and pay at merchants',
+            'Loyalty points, tiers and rewards',
+            'Pre-order scheduling and live order tracking',
+            'Installable PWA'
+        ],
+        tech: ['Next.js', 'Tailwind CSS', 'shadcn/ui', 'PWA', 'TypeScript'],
+        challenges: 'Making a web app feel like a native campus app on students\' phones: a mobile-first layout with bottom navigation, PWA install to the home screen, and short flows for the common tasks of ordering, paying and checking points.',
+        liveUrl: 'https://uitm-app.vercel.app',
+        repoUrl: 'https://github.com/cebause01/lendueats'
+    },
+    'ocr-web-app': {
+        tag: 'OCR / Document AI',
+        title: 'OCR Web App',
+        description: 'A Laravel web app for extracting text from photos of documents. Uploaded images are cropped to the document with OpenCV and then read with EasyOCR, which runs as a Python process called from Laravel.',
+        features: [
+            'Upload a document photo from the browser',
+            'Automatic document detection and cropping with OpenCV',
+            'Text extraction with EasyOCR',
+            'Extracted text shown back in the web UI',
+            'Laravel backend calling a Python OCR pipeline',
+            'Tailwind CSS interface'
+        ],
+        tech: ['Laravel', 'PHP', 'Python', 'EasyOCR', 'OpenCV', 'Tailwind CSS'],
+        challenges: 'Joining a PHP web app to a Python computer-vision pipeline: Laravel hands each upload to the Python script and returns its output, and cropping the photo to the document first gives the OCR step a cleaner image to read.',
+        repoUrl: 'https://github.com/cebause01/ocr-web-app'
     }
 };
 
@@ -607,8 +693,14 @@ const openProjectModal = (projectId, trigger) => {
 
     modal.querySelector('.modal-challenges-text').textContent = project.challenges;
 
-    setModalLink(modal.querySelector('.modal-live-link'), project.liveUrl, externalLinkSvg, 'Visit Site',
-        `Visit Site: ${project.title}`);
+    const liveLabel = project.liveLabel || 'Visit Site';
+    setModalLink(
+        modal.querySelector('.modal-live-link'),
+        project.liveUrl,
+        project.liveUrl && project.liveUrl.includes('github.com') ? githubSvg : externalLinkSvg,
+        liveLabel,
+        `${liveLabel}: ${project.title}`
+    );
     const repoUrl = project.repoUrl;
     setModalLink(
         modal.querySelector('.modal-github-link'),
