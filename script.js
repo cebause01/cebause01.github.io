@@ -40,18 +40,66 @@ document.addEventListener('click', (e) => {
 // ===================================
 // Smooth Scroll for Navigation Links
 // ===================================
+// Content above a target can change height mid-scroll (lazy dome, fade-ins),
+// so the target is re-measured every frame and the scroll re-aimed until it settles.
+const anchorScrollOffset = 96;
+const anchorScrollWatchMs = 3000;
+const anchorReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+let anchorScrollRun = 0;
+
+// Layout position via offsetTop, so fade-in / parallax transforms don't skew it
+const getAnchorScrollTop = (el) => {
+    let top = 0;
+    for (let node = el; node; node = node.offsetParent) {
+        top += node.offsetTop;
+    }
+    const maxTop = document.documentElement.scrollHeight - window.innerHeight;
+    return Math.max(0, Math.min(top - anchorScrollOffset, maxTop));
+};
+
+const cancelAnchorScroll = () => {
+    anchorScrollRun++;
+};
+['wheel', 'touchstart', 'keydown'].forEach((type) => {
+    window.addEventListener(type, cancelAnchorScroll, { passive: true });
+});
+
+const scrollToAnchor = (target) => {
+    const run = ++anchorScrollRun;
+    const behavior = anchorReducedMotion.matches ? 'auto' : 'smooth';
+    const start = performance.now();
+    let goal = getAnchorScrollTop(target);
+    window.scrollTo({ top: goal, behavior });
+
+    let lastY = window.pageYOffset;
+    let stillFrames = 0;
+    const check = () => {
+        if (run !== anchorScrollRun) return;
+        const y = window.pageYOffset;
+        stillFrames = Math.abs(y - lastY) < 0.5 ? stillFrames + 1 : 0;
+        lastY = y;
+
+        const next = getAnchorScrollTop(target);
+        const moved = Math.abs(next - goal) > 1;
+        // Re-aim when the target moved, or when the scroll stopped short of it
+        if (moved || (stillFrames >= 6 && Math.abs(y - next) > 1)) {
+            goal = next;
+            stillFrames = 0;
+            window.scrollTo({ top: goal, behavior });
+        }
+        if (performance.now() - start < anchorScrollWatchMs) {
+            requestAnimationFrame(check);
+        }
+    };
+    requestAnimationFrame(check);
+};
+
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
-            const offset = 96;
-            const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
-            
-            window.scrollTo({
-                top: targetPosition,
-                behavior: 'smooth'
-            });
+            scrollToAnchor(target);
         }
     });
 });
@@ -162,6 +210,7 @@ const scrollProgress = document.getElementById('scrollProgress');
 const backToTopButton = document.getElementById('backToTop');
 
 backToTopButton?.addEventListener('click', () => {
+    cancelAnchorScroll();
     window.scrollTo({
         top: 0,
         behavior: 'smooth'
